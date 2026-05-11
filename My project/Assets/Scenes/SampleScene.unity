@@ -717,6 +717,7 @@ MonoBehaviour:
   WallJumpHeight: 6
   BaseJumpCount: 1
   JumpCount: 0
+  canWallJump: 0
 --- !u!114 &1938419094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,8 +731,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
   playerCamera: {fileID: 0}
-  HorizontalSensitivity: 50
-  VerticalSensitivity: 50
+  HorizontalSensitivity: 5
+  VerticalSensitivity: 5
   IsCursorVisible: 0
 --- !u!114 &1938419095
 MonoBehaviour:

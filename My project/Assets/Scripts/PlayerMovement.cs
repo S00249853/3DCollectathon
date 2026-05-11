@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -37,7 +38,8 @@ public class PlayerMovement : MonoBehaviour
     public int JumpCount;
     private Vector3 WallJumpForce;
 
-    private bool canWallJump;
+    public bool canWallJump;
+
 
     private void Awake()
     {
@@ -54,13 +56,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext obj)
     {
-        JumpCount--;
+        
 
         if (CanJump())
-        {
-            JumpCount = BaseJumpCount;
-        }
-        if (JumpCount > 0)
         {
             movementVelocity.y = Mathf.Sqrt(JumpHeight * 2F * Gravity);
         }
@@ -68,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         if (canWallJump)
         {
             movementVelocity.y = Mathf.Sqrt(WallJumpHeight * 2F * Gravity);
-            movementVelocity.x = WallJumpForce.x;
+            movement.x = WallJumpForce.x;
         }
 
     }
@@ -103,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             DashCdTimer = DashCd;
 
             currentSpeed = DashSpeed;
-            Vector3 forceToApply = transform.forward * DashForce + transform.up * DashUpwardForce;
+            Vector3 forceToApply = characterController.transform.forward * DashForce + transform.up * DashUpwardForce;
 
             movementVelocity = forceToApply;
 
@@ -137,14 +135,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+
+        movement = transform.right * movementInput.x + transform.forward * movementInput.y;
+
         if (characterController.isGrounded && movementVelocity.y < 0
             )
         {
             movementVelocity.y = -1f;
         }
-        else 
+        else if (!characterController.isGrounded && movementVelocity.y > 0)
         {
             movementVelocity.y -= Gravity * Time.deltaTime;
+            movement = lastMovement;
+        }
+        else if (!characterController.isGrounded && movementVelocity.y <= 0)
+        {
+            movementVelocity.y -= Gravity * Time.deltaTime;
+            movement = movement;
         }
 
         if (DashCdTimer > 0)
@@ -152,10 +159,18 @@ public class PlayerMovement : MonoBehaviour
             DashCdTimer -= Time.deltaTime;
         }
 
-        movement = transform.right * movementInput.x + transform.forward * movementInput.y;
+      //  transform.Rotate(Vector3.up * movementInput.x);
+
+       
+
+       
+
+      //  movement.Normalize();
+
         movementVelocity.y -= Gravity * Time.deltaTime;
 
         characterController.Move(((movement * currentSpeed) + movementVelocity) * Time.deltaTime);
+        lastMovement = movement;
         
     }
 }
