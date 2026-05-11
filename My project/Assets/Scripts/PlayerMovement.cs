@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movementInput;
     private Vector3 movementVelocity;
     private Vector3 movement;
+    private Vector3 lastMovement;
     private float currentSpeed;
 
     [Header("Settings")]
@@ -29,10 +30,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float DashDuration;
     [SerializeField] private float DashCd;
     [SerializeField] private float Gravity = 2.81f;
+    [SerializeField] private float WallJumpHeight;
     public int BaseJumpCount;
     private float DashCdTimer;
     private float NormalHeight;
     public int JumpCount;
+    private Vector3 WallJumpForce;
+
+    private bool canWallJump;
 
     private void Awake()
     {
@@ -60,7 +65,27 @@ public class PlayerMovement : MonoBehaviour
             movementVelocity.y = Mathf.Sqrt(JumpHeight * 2F * Gravity);
         }
 
+        if (canWallJump)
+        {
+            movementVelocity.y = Mathf.Sqrt(WallJumpHeight * 2F * Gravity);
+            movementVelocity.x = WallJumpForce.x;
+        }
+
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (!characterController.isGrounded && hit.normal.y < 0.1f)
+        {
+            canWallJump = true;
+            WallJumpForce = hit.normal * WalkSpeed;
+        }
+        else
+        {
+            canWallJump = false;
+        }
+    }
+
     public bool CanJump()
     {
         return characterController.isGrounded;
@@ -112,9 +137,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (characterController.isGrounded && movementVelocity.y < 0)
+        if (characterController.isGrounded && movementVelocity.y < 0
+            )
         {
-            movementVelocity.y = -2f;
+            movementVelocity.y = -1f;
+        }
+        else 
+        {
+            movementVelocity.y -= Gravity * Time.deltaTime;
         }
 
         if (DashCdTimer > 0)
@@ -126,6 +156,6 @@ public class PlayerMovement : MonoBehaviour
         movementVelocity.y -= Gravity * Time.deltaTime;
 
         characterController.Move(((movement * currentSpeed) + movementVelocity) * Time.deltaTime);
-
+        
     }
 }
