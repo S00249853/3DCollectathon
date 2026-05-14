@@ -707,17 +707,12 @@ MonoBehaviour:
   characterController: {fileID: 1938419096}
   WalkSpeed: 10
   DashSpeed: 0
-  CrouchHeight: 1
-  JumpHeight: 5
   DashForce: 40
   DashUpwardForce: 0.5
   DashDuration: 0.25
   DashCd: 0.75
-  Gravity: 9.81
-  WallJumpHeight: 6
-  BaseJumpCount: 1
-  JumpCount: 0
-  canWallJump: 0
+  IsJumping: 0
+  IsJumpPressed: 0
 --- !u!114 &1938419094
 MonoBehaviour:
   m_ObjectHideFlags: 0

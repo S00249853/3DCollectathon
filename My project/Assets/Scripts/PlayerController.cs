@@ -40,7 +40,8 @@ public class PlayerController : MonoBehaviour
 
         playerInput.actions["Move"].performed += playerMovement.OnMove;
         playerInput.actions["Move"].canceled += playerMovement.OnMove;
-        playerInput.actions["Jump"].performed += playerMovement.OnJump;
+        playerInput.actions["Jump"].started += playerMovement.OnJump;
+        playerInput.actions["Jump"].canceled += playerMovement.OnJump;
         //playerInput.actions["Crouch"].performed += playerMovement.OnCrouch;
         //playerInput.actions["Sprint"].performed += playerMovement.OnSprint;
         playerInput.actions["Dash"].performed += playerMovement.OnDash;
@@ -57,7 +58,8 @@ public class PlayerController : MonoBehaviour
 
         playerInput.actions["Move"].performed -= playerMovement.OnMove;
         playerInput.actions["Move"].canceled -= playerMovement.OnMove;
-        playerInput.actions["Jump"].performed -= playerMovement.OnJump;
+        playerInput.actions["Jump"].started -= playerMovement.OnJump;
+        playerInput.actions["Jump"].canceled -= playerMovement.OnJump;
         //playerInput.actions["Crouch"].performed -= playerMovement.OnCrouch;
         //playerInput.actions["Sprint"].performed -= playerMovement.OnSprint;
         playerInput.actions["Dash"].performed -= playerMovement.OnDash;
