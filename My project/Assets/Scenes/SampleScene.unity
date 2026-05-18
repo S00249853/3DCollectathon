@@ -705,6 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   characterController: {fileID: 1938419096}
+  movementInput: {x: 0, y: 0}
   WalkSpeed: 10
   DashSpeed: 0
   DashForce: 40
@@ -713,6 +714,9 @@ MonoBehaviour:
   DashCd: 0.75
   IsJumping: 0
   IsJumpPressed: 0
+  CanSideflip: 0
+  CanWallJump: 0
+  FlipCd: 0
 --- !u!114 &1938419094
 MonoBehaviour:
   m_ObjectHideFlags: 0
