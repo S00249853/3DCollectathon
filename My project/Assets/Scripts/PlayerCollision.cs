@@ -2,25 +2,27 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    private PlayerMovement pm;
+    private PlayerCollectables playerCollectables;
 
     private void Awake()
     {
-        pm = GetComponent<PlayerMovement>();
+        playerCollectables = GetComponent<PlayerCollectables>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.gameObject.tag == "Jump")
-        //{
-        //    pm.JumpCount++;
-        //}
+        //Handles the player collecting collectables
+        if (other.gameObject.tag == "Star")
+        {
+            Destroy(other.gameObject);
+            playerCollectables.starCount++;
+        }
 
-        //if (other.gameObject.tag == "JumpPermanent")
-        //{
-        //    Destroy(other.gameObject);
-        //    pm.BaseJumpCount++;
-        //}
+        if (other.gameObject.tag == "Coin")
+        {
+            Destroy(other.gameObject);
+            playerCollectables.coinCount++;
+        }
 
         if (other.gameObject.tag == "Destroy")
         {

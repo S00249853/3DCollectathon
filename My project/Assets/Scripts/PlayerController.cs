@@ -2,24 +2,27 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
-[RequireComponent(typeof(PlayerCamera))]
+//[RequireComponent(typeof(PlayerCamera))]
 //[RequireComponent(typeof(PlayerAttack))]
 //[RequireComponent(typeof(PlayerInteraction))]
-[RequireComponent(typeof(PlayerMovement))]
+//[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerStateMachine))]
 public class PlayerController : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private PlayerCamera PlayerCamera;
-    private PlayerMovement playerMovement;
+    //private PlayerMovement playerMovement;
+    private PlayerStateMachine playerStateMachine;
+
   //  private PlayerInteraction playerInteraction;
   //  private PlayerAttack playerAttack;
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        playerMovement = GetComponent<PlayerMovement>();
+       // playerMovement = GetComponent<PlayerMovement>();
+        playerStateMachine = GetComponent<PlayerStateMachine>();
       //  playerInteraction = GetComponent<PlayerInteraction>();
-        PlayerCamera = GetComponent<PlayerCamera>();
+     //   PlayerCamera = GetComponent<PlayerCamera>();
       //  playerAttack = GetComponent<PlayerAttack>();
     }
 
@@ -35,36 +38,36 @@ public class PlayerController : MonoBehaviour
 
     protected virtual void BindInputs()
     {
-        playerInput.actions["OpenMenu"].performed += OnOpenMenu;
-        playerInput.actions["CloseMenu"].performed += OnCloseMenu;
+    //    playerInput.actions["OpenMenu"].performed += OnOpenMenu;
+    //    playerInput.actions["CloseMenu"].performed += OnCloseMenu;
 
-        playerInput.actions["Move"].performed += playerMovement.OnMove;
-        playerInput.actions["Move"].canceled += playerMovement.OnMove;
-        playerInput.actions["Jump"].started += playerMovement.OnJump;
-        playerInput.actions["Jump"].canceled += playerMovement.OnJump;
+        playerInput.actions["Move"].performed += playerStateMachine.OnMove;
+        playerInput.actions["Move"].canceled += playerStateMachine.OnMove;
+        playerInput.actions["Jump"].started += playerStateMachine.OnJump;
+        playerInput.actions["Jump"].canceled += playerStateMachine.OnJump;
         //playerInput.actions["Crouch"].performed += playerMovement.OnCrouch;
         //playerInput.actions["Sprint"].performed += playerMovement.OnSprint;
-        playerInput.actions["Dash"].performed += playerMovement.OnDash;
+        playerInput.actions["Dash"].performed += playerStateMachine.OnDash;
 
-        playerInput.actions["Look"].performed += PlayerCamera.OnLook;
+     //   playerInput.actions["Look"].performed += PlayerCamera.OnLook;
        // playerInput.actions["Interact"].performed += playerInteraction.OnInteract;
        // playerInput.actions["Attack"].performed += playerAttack.OnAttack;
     }
 
     protected virtual void UnBindInputs()
     {
-        playerInput.actions["OpenMenu"].performed -= OnOpenMenu;
-        playerInput.actions["CloseMenu"].performed -= OnCloseMenu;
+        //playerInput.actions["OpenMenu"].performed -= OnOpenMenu;
+        //playerInput.actions["CloseMenu"].performed -= OnCloseMenu;
 
-        playerInput.actions["Move"].performed -= playerMovement.OnMove;
-        playerInput.actions["Move"].canceled -= playerMovement.OnMove;
-        playerInput.actions["Jump"].started -= playerMovement.OnJump;
-        playerInput.actions["Jump"].canceled -= playerMovement.OnJump;
+        playerInput.actions["Move"].performed -= playerStateMachine.OnMove;
+        playerInput.actions["Move"].canceled -= playerStateMachine.OnMove;
+        playerInput.actions["Jump"].started -= playerStateMachine.OnJump;
+        playerInput.actions["Jump"].canceled -= playerStateMachine.OnJump;
         //playerInput.actions["Crouch"].performed -= playerMovement.OnCrouch;
         //playerInput.actions["Sprint"].performed -= playerMovement.OnSprint;
-        playerInput.actions["Dash"].performed -= playerMovement.OnDash;
+        playerInput.actions["Dash"].performed -= playerStateMachine.OnDash;
 
-        playerInput.actions["Look"].performed -= PlayerCamera.OnLook;
+       // playerInput.actions["Look"].performed -= PlayerCamera.OnLook;
      //   playerInput.actions["Interact"].performed -= playerInteraction.OnInteract;
       //  playerInput.actions["Attack"].performed -= playerAttack.OnAttack;
     }
