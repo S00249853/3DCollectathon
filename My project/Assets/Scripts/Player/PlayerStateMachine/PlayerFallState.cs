@@ -13,10 +13,19 @@ public class PlayerFallState : PlayerBaseState
         {
             SwitchState(Factory.Grounded());
         }
+        else if (Ctx.IsDashing)
+        {
+            SwitchState(Factory.Dash());
+        }
+        else if (!Ctx.CharacterController.isGrounded && Ctx.IsGroundPounding)
+        {
+            SwitchState(Factory.GroundPound());
+        }
     }
 
     public override void EnterState()
     {
+        Debug.Log("Falling");
         InitializeSubState();
     }
 

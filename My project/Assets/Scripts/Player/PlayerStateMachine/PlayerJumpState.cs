@@ -42,7 +42,15 @@ public override void CheckSwitchState() {
         {
             SwitchState(Factory.Grounded());
         }
-            }
+        else if (Ctx.IsDashing)
+        {
+            SwitchState(Factory.Dash());
+        }
+        else if (Ctx.IsGroundPounding)
+        {
+            SwitchState(Factory.GroundPound());
+        }
+    }
 
 public override void InitializeSubState() {
         //if (Ctx.IsMovementPressed)

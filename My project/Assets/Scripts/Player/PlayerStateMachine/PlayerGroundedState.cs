@@ -30,6 +30,10 @@ public class PlayerGroundedState : PlayerBaseState
         {
             SwitchState(Factory.Fall());
         }
+        else if (Ctx.IsDashing)
+        {
+            SwitchState(Factory.Dash());
+        }
     }
 
     public override void InitializeSubState() { 

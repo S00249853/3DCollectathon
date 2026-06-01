@@ -3,10 +3,22 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     private PlayerCollectables playerCollectables;
+    private PlayerStateMachine playerStateMachine;
+
+    public bool Test;
 
     private void Awake()
     {
         playerCollectables = GetComponent<PlayerCollectables>();
+        playerStateMachine = GetComponent<PlayerStateMachine>();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (playerStateMachine.IsGroundPounding)
+        {
+         
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,6 +39,12 @@ public class PlayerCollision : MonoBehaviour
         if (other.gameObject.tag == "Destroy")
         {
             Destroy(gameObject);
+        }
+
+        IStompable stomped = other.gameObject.GetComponent<IStompable>();
+        if (stomped != null)
+        {
+            stomped.Stomped();
         }
 
         //if (other.gameObject.tag == "Victory")

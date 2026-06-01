@@ -45,13 +45,14 @@ public class PlayerController : MonoBehaviour
         playerInput.actions["Move"].canceled += playerStateMachine.OnMove;
         playerInput.actions["Jump"].started += playerStateMachine.OnJump;
         playerInput.actions["Jump"].canceled += playerStateMachine.OnJump;
-        //playerInput.actions["Crouch"].performed += playerMovement.OnCrouch;
+        playerInput.actions["Crouch"].started += playerStateMachine.OnCrouch;
+        playerInput.actions["Crouch"].canceled += playerStateMachine.OnCrouch;
         //playerInput.actions["Sprint"].performed += playerMovement.OnSprint;
         playerInput.actions["Dash"].performed += playerStateMachine.OnDash;
 
-     //   playerInput.actions["Look"].performed += PlayerCamera.OnLook;
-       // playerInput.actions["Interact"].performed += playerInteraction.OnInteract;
-       // playerInput.actions["Attack"].performed += playerAttack.OnAttack;
+        //   playerInput.actions["Look"].performed += PlayerCamera.OnLook;
+        // playerInput.actions["Interact"].performed += playerInteraction.OnInteract;
+        // playerInput.actions["Attack"].performed += playerAttack.OnAttack;
     }
 
     protected virtual void UnBindInputs()
@@ -63,7 +64,8 @@ public class PlayerController : MonoBehaviour
         playerInput.actions["Move"].canceled -= playerStateMachine.OnMove;
         playerInput.actions["Jump"].started -= playerStateMachine.OnJump;
         playerInput.actions["Jump"].canceled -= playerStateMachine.OnJump;
-        //playerInput.actions["Crouch"].performed -= playerMovement.OnCrouch;
+        playerInput.actions["Crouch"].started -= playerStateMachine.OnCrouch;
+        playerInput.actions["Crouch"].canceled -= playerStateMachine.OnCrouch;
         //playerInput.actions["Sprint"].performed -= playerMovement.OnSprint;
         playerInput.actions["Dash"].performed -= playerStateMachine.OnDash;
 

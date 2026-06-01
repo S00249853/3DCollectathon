@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,10 +24,10 @@ public class PlayerStateMachine : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float walkSpeed;
     [SerializeField] private float DashSpeed;
-    [SerializeField] private float DashForce;
-    [SerializeField] private float DashUpwardForce;
-    [SerializeField] private float DashDuration;
-    [SerializeField] private float DashCd;
+    [SerializeField] private float dashForce;
+    [SerializeField] private float dashUpwardForce;
+    [SerializeField] private float dashDuration;
+    [SerializeField] private float dashCd;
     [SerializeField] private float FlipCd;
 
     //Gravity Variables
@@ -47,10 +48,14 @@ public class PlayerStateMachine : MonoBehaviour
     //Miscellanious Variables
     public bool CanSideflip;
     public bool CanWallJump;
-    private float _dashCdTimer;
+    [SerializeField]private float _dashCdTimer;
     float _rotationFactorPerFrame = 15.0f;
     private Vector3 _wallJumpForce;
     private float _flipCdTimer;
+    [SerializeField]private bool _isDashing;
+    [SerializeField]private bool _isCrouching;
+    [SerializeField] private bool _isGroundPounding;
+
 
     //State Variables
     PlayerBaseState _currentState;
@@ -67,12 +72,21 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsJumping { set { _isJumping = value; } }
     public bool IsJumpPressed { get { return _isJumpPressed; } }
     public bool IsMovementPressed {  get { return _isMovementPressed; } }
+    public bool IsCrouching { get {  return _isCrouching; } set { _isCrouching = value; } }
+    public bool IsGroundPounding { get { return _isGroundPounding; } set { _isGroundPounding = value; } }
+    public bool IsDashing { get { return _isDashing; } set  { _isDashing = value; } }
     public float CurrentMovementY { get { return _movement.y; } set { _movement.y = value; } }
     public float AppliedMovementY { get { return _appliedMovement.y; } set { _appliedMovement.y = value; } }
     public float AppliedMovementX { get { return _appliedMovement.x; } set { _appliedMovement.x = value; } }
     public float AppliedMovementZ { get { return _appliedMovement.z; } set { _appliedMovement.z = value; } }
     public float Gravity { get { return _gravity; } }
     public float WalkSpeed { get { return walkSpeed; } }
+    public float DashCdTimer { get { return _dashCdTimer; } set { _dashCdTimer = value; } }
+    public float DashCd { get { return dashCd; } }
+    public float DashForce { get { return dashForce; } }
+    public float DashUpwardForce {  get { return dashUpwardForce; } }
+    public float DashDuration { get { return dashDuration; } }
+    public Vector3 MovementVelocity { get { return _movementVelocity; } set { _movementVelocity = value; } } 
     public Vector2 MovementInput { get { return _movementInput; } }
 
     private void Awake()
@@ -133,6 +147,15 @@ public class PlayerStateMachine : MonoBehaviour
         //}
     }
 
+    public void OnCrouch(InputAction.CallbackContext obj)
+    {
+        _isCrouching = obj.ReadValueAsButton();
+        if (!_characterController.isGrounded)
+        {
+            _isGroundPounding = true;
+        }
+    }
+
     //private void ResetWallJump()
     //{
     //    _movementVelocity = Vector3.zero;
@@ -140,33 +163,24 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext obj)
     {
-
-        //    if (_dashCdTimer > 0)
-        //    {
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        _dashCdTimer = DashCd;
-
-        //        _currentSpeed = DashSpeed;
-        //        Vector3 forceToApply = _characterController.transform.forward * DashForce + transform.up * DashUpwardForce;
-
-        //        _movementVelocity = forceToApply;
-
-        //        Invoke(nameof(ResetDash), DashDuration);
-
+        if (_dashCdTimer <= 0)
+        {
+            IsDashing = true;
+        }
+      
     }
 
 
-//}
-//private void ResetDash()
-//{
-//    _currentSpeed = walkSpeed;
-//    _movementVelocity = Vector3.zero;
-//}
 
-private void HandleRotation()
+    public void ResetDash()
+    {
+        Debug.Log("Reset Dash called");
+      //  _movementVelocity = Vector3.zero;
+        IsDashing = false;
+        Debug.Log("Reset Dash ended");
+    }
+
+    private void HandleRotation()
     {
         Vector3 positionToLookAt;
 
@@ -181,6 +195,13 @@ private void HandleRotation()
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
 
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
+        }
+    }
+    private void HandleTimers()
+    {
+        if (_dashCdTimer > 0)
+        {
+            _dashCdTimer -= Time.deltaTime;
         }
     }
 
@@ -211,7 +232,7 @@ private void HandleRotation()
         _currentState.UpdateStates();
 
         _cameraRelativeMovement = ConvertToCameraSpace(_appliedMovement);
-        _characterController.Move(((_cameraRelativeMovement) + _movementVelocity) * Time.deltaTime);
+        _characterController.Move((_cameraRelativeMovement + _movementVelocity) * Time.deltaTime);
+        HandleTimers();
     }
-
 }
