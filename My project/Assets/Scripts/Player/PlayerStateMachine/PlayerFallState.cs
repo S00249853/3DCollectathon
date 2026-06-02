@@ -21,6 +21,10 @@ public class PlayerFallState : PlayerBaseState
         {
             SwitchState(Factory.GroundPound());
         }
+        else if (Ctx.OnWall)
+        {
+            SwitchState(Factory.Wall());
+        }
     }
 
     public override void EnterState()

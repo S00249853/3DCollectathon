@@ -36,6 +36,7 @@ public class PlayerStateMachine : MonoBehaviour
     //Jumping Variables
     private bool _isJumping;
     private bool _isJumpPressed;
+    private bool _wallJump;
     private float _initialJumpVelocity;
     private float _maxJumpHeight = 2f;
     private float _maxJumpTime = 1f;
@@ -47,7 +48,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     //Miscellanious Variables
     public bool CanSideflip;
-    public bool CanWallJump;
+    public bool _onWall;
     [SerializeField]private float _dashCdTimer;
     float _rotationFactorPerFrame = 15.0f;
     private Vector3 _wallJumpForce;
@@ -55,6 +56,7 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]private bool _isDashing;
     [SerializeField]private bool _isCrouching;
     [SerializeField] private bool _isGroundPounding;
+    private ControllerColliderHit _wall;
 
 
     //State Variables
@@ -75,6 +77,8 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsCrouching { get {  return _isCrouching; } set { _isCrouching = value; } }
     public bool IsGroundPounding { get { return _isGroundPounding; } set { _isGroundPounding = value; } }
     public bool IsDashing { get { return _isDashing; } set  { _isDashing = value; } }
+    public bool OnWall { get { return _onWall; } set { _onWall = value; } }
+    public bool WallJump { get { return _wallJump; } set { _wallJump = value; } }
     public float CurrentMovementY { get { return _movement.y; } set { _movement.y = value; } }
     public float AppliedMovementY { get { return _appliedMovement.y; } set { _appliedMovement.y = value; } }
     public float AppliedMovementX { get { return _appliedMovement.x; } set { _appliedMovement.x = value; } }
@@ -86,8 +90,10 @@ public class PlayerStateMachine : MonoBehaviour
     public float DashForce { get { return dashForce; } }
     public float DashUpwardForce {  get { return dashUpwardForce; } }
     public float DashDuration { get { return dashDuration; } }
+    public float MaxJumpTime { get { return _maxJumpTime; } }
     public Vector3 MovementVelocity { get { return _movementVelocity; } set { _movementVelocity = value; } } 
     public Vector2 MovementInput { get { return _movementInput; } }
+    public ControllerColliderHit Wall { get { return _wall; } }
 
     private void Awake()
     {
@@ -138,13 +144,10 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _isJumpPressed = obj.ReadValueAsButton();
         _requireNewJumpPress = false;
-
-        //if (CanWallJump)
-        //{
-        //    CanWallJump = false;
-        //    _movementVelocity = _wallJumpForce;
-        //    Invoke(nameof(ResetWallJump), _maxJumpTime / 2);
-        //}
+       if (_onWall)
+        {
+            _wallJump = true;
+        }
     }
 
     public void OnCrouch(InputAction.CallbackContext obj)
@@ -190,7 +193,14 @@ public class PlayerStateMachine : MonoBehaviour
 
         Quaternion currentRotation = transform.rotation;
 
-        if (_isMovementPressed)
+        if (_onWall)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(_wall.normal);
+
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
+        }
+
+        else if (_isMovementPressed)
         {
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
 
@@ -224,6 +234,23 @@ public class PlayerStateMachine : MonoBehaviour
         Vector3 vectorRotatedToCameraSpace = cameraForewardZProduct + cameraRightXProduct;
         vectorRotatedToCameraSpace.y = currentYValue;
         return vectorRotatedToCameraSpace;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (!_characterController.isGrounded && hit.normal.y < 0.1f)
+        {
+            _wall = hit;
+            _onWall = true;
+        }
+        else
+        {
+            _onWall = false;
+        }
+    }
+    public void ResetWallJump()
+    {
+        _movementVelocity = Vector3.zero;
     }
 
     private void Update()

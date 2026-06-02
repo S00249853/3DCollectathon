@@ -8,7 +8,9 @@ enum PlayerStates
     fall,
     dash,
     groundPound,
-    still
+    still,
+    wall,
+    wallJump
 }
 
 public class PlayerStateFactory 
@@ -25,6 +27,8 @@ public class PlayerStateFactory
         _states[PlayerStates.dash] = new PlayerDashState(_context, this);
         _states[PlayerStates.groundPound] = new PlayerGroundPoundState(_context, this);
         _states[PlayerStates.still] = new PlayerStillState(_context, this);
+        _states[PlayerStates.wall] = new PlayerWallState(_context, this);
+        _states[PlayerStates.wallJump] = new PlayerWallJumpState(_context, this);
     }
 
     public PlayerBaseState Move()
@@ -58,5 +62,13 @@ public class PlayerStateFactory
     public PlayerBaseState Still()
     {
         return _states[PlayerStates.still];
+    }
+    public PlayerBaseState Wall()
+    {
+        return _states[PlayerStates.wall];
+    }
+    public PlayerBaseState WallJump()
+    {
+        return _states[PlayerStates.wallJump];
     }
 }

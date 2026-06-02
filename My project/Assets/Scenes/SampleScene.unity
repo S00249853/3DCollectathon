@@ -1501,7 +1501,7 @@ MonoBehaviour:
   dashCd: 0.75
   FlipCd: 0
   CanSideflip: 0
-  CanWallJump: 0
+  _onWall: 0
   _dashCdTimer: 0
   _isDashing: 0
   _isCrouching: 0
@@ -1730,7 +1730,7 @@ PrefabInstance:
     - target: {fileID: 6039702996436428276, guid: 4edb1de6aa1343e4084787d0582af393, type: 3}
       propertyPath: _door
       value: 
-      objectReference: {fileID: 1948353733}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1786,7 +1786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5478644634944706702, guid: 9aa6b37fed13b414bb9bdfbc96612ad8, type: 3}
       propertyPath: _challenge.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5478644634944706702, guid: 9aa6b37fed13b414bb9bdfbc96612ad8, type: 3}
       propertyPath: '_challenge.Array.data[0]'
