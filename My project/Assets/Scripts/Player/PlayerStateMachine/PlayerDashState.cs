@@ -32,6 +32,8 @@ public class PlayerDashState : PlayerBaseState
     public override void ExitState()
     {
         Ctx.MovementVelocity = _startVelocity;
+        Ctx.CurrentMovementY = 0;
+        Ctx.AppliedMovementY = 0; 
     }
 
     public override void InitializeSubState()
@@ -41,6 +43,7 @@ public class PlayerDashState : PlayerBaseState
 
     public override void UpdateState()
     {
+        Ctx.CurrentMovementY = 0;
         Ctx.AppliedMovementY = 0;
         CheckSwitchState();
     }

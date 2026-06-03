@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -709,14 +709,14 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs:
-    - m_Data: 65922
+    - m_Data: 65904
     m_LastClickedID:
-      m_Data: 65922
+      m_Data: 65904
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 65858
-    - m_Data: 65868
-    - m_Data: 65924
+    - m_Data: 65840
+    - m_Data: 65850
+    - m_Data: 65906
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
