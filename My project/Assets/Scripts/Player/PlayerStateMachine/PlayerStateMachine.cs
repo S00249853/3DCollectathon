@@ -18,6 +18,7 @@ public class PlayerStateMachine : MonoBehaviour
     private Vector3 _appliedMovement;
     private float _currentSpeed;
     private bool _isMovementPressed;
+    private bool _freezeMovement;
     Vector3 _cameraRelativeMovement;
 
     //Editable Variables
@@ -79,7 +80,10 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsDashing { get { return _isDashing; } set  { _isDashing = value; } }
     public bool OnWall { get { return _onWall; } set { _onWall = value; } }
     public bool WallJump { get { return _wallJump; } set { _wallJump = value; } }
+    public bool FreezeMovement { get { return _freezeMovement; } set { _freezeMovement = value; } }
     public float CurrentMovementY { get { return _movement.y; } set { _movement.y = value; } }
+    public float CurrentMovementX { get { return _movement.x; } set { _movement.x = value; } }
+    public float CurrentMovementZ { get { return _movement.z; } set { _movement.z = value; } }
     public float AppliedMovementY { get { return _appliedMovement.y; } set { _appliedMovement.y = value; } }
     public float AppliedMovementX { get { return _appliedMovement.x; } set { _appliedMovement.x = value; } }
     public float AppliedMovementZ { get { return _appliedMovement.z; } set { _appliedMovement.z = value; } }
@@ -91,7 +95,8 @@ public class PlayerStateMachine : MonoBehaviour
     public float DashUpwardForce {  get { return dashUpwardForce; } }
     public float DashDuration { get { return dashDuration; } }
     public float MaxJumpTime { get { return _maxJumpTime; } }
-    public Vector3 MovementVelocity { get { return _movementVelocity; } set { _movementVelocity = value; } } 
+    public Vector3 MovementVelocity { get { return _movementVelocity; } set { _movementVelocity = value; } }
+    public Vector3 AppliedMovement { get { return _cameraRelativeMovement; } set { _cameraRelativeMovement = value; } }
     public Vector2 MovementInput { get { return _movementInput; } }
     public ControllerColliderHit Wall { get { return _wall; } }
 
@@ -144,9 +149,12 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _isJumpPressed = obj.ReadValueAsButton();
         _requireNewJumpPress = false;
-       if (_onWall)
+        if (obj.started)
         {
-            _wallJump = true;
+            if (_onWall)
+            {
+                _wallJump = true;
+            }
         }
     }
 
@@ -248,11 +256,6 @@ public class PlayerStateMachine : MonoBehaviour
             _onWall = false;
         }
     }
-    public void ResetWallJump()
-    {
-        _movementVelocity = Vector3.zero;
-    }
-
     private void Update()
     {
         HandleRotation();

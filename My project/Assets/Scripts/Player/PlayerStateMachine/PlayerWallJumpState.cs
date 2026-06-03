@@ -9,11 +9,7 @@ public class PlayerWallJumpState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (Ctx.MovementVelocity == Vector3.zero)
-        {
-            SwitchState(Factory.Fall());
-        }
-        else if (Ctx.CharacterController.isGrounded)
+        if (Ctx.CharacterController.isGrounded)
         {
             SwitchState(Factory.Grounded());
         }
@@ -34,30 +30,55 @@ public class PlayerWallJumpState : PlayerBaseState
     public override void EnterState()
     {
         InitializeSubState();
-        Ctx.WallJump = false;
         HandleWallJump();
+        Ctx.WallJump = false;
+        Ctx.FreezeMovement = true;
     }
 
     public override void ExitState()
     {
-
+        Ctx.FreezeMovement = false;
+        Ctx.MovementVelocity = Vector3.zero;
     }
 
     public override void InitializeSubState()
     {
-        SetSubState(Factory.Still());
+        SetSubState(Factory.Move());
     }
 
     public override void UpdateState()
     {
+        HandleGravity();
         CheckSwitchState();
     }
 
     private void HandleWallJump()
     {
-       Vector3 wallJumpForce = Ctx.Wall.normal * Ctx.WalkSpeed + Ctx.transform.up * Ctx.InitialJumpVelocities[1];
-        Ctx.MovementVelocity = wallJumpForce;
+       Vector3 wallJumpForce = Ctx.Wall.normal * Ctx.WalkSpeed;
 
-        Ctx.Invoke(nameof(Ctx.ResetWallJump), Ctx.MaxJumpTime / 3);
+        Ctx.CurrentMovementY = Ctx.InitialJumpVelocities[1] / 1.1f;
+        Ctx.AppliedMovementY = Ctx.InitialJumpVelocities[1] / 1.1f;
+     
+        Ctx.MovementVelocity = wallJumpForce;
+    }
+    private void HandleGravity()
+    {
+        bool isFalling = Ctx.CurrentMovementY <= 0.0f;
+        float fallMultiplier = 2.0f;
+
+        if (isFalling)
+        {
+            Ctx.FreezeMovement = false;
+            Ctx.MovementVelocity = Vector3.zero;
+            float previousYVelocity = Ctx.CurrentMovementY;
+            Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.JumpGravities[1] * fallMultiplier * Time.deltaTime);
+            Ctx.AppliedMovementY = Mathf.Max((previousYVelocity + Ctx.CurrentMovementY) * .5f, -20.0f);
+        }
+        else
+        {
+            float previousYVelocity = Ctx.CurrentMovementY;
+            Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.JumpGravities[1] * Time.deltaTime);
+            Ctx.AppliedMovementY = (previousYVelocity + Ctx.CurrentMovementY) * .5f;
+        }
     }
 }
