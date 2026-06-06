@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 270
     height: 671
-  m_MinSize: {x: 201, y: 226}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -690,7 +690,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Player/PlayerStateMachine
+    - Assets/Scripts/Enemies
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -700,7 +700,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Player/PlayerStateMachine
+  - Assets/Scripts/Enemies
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Dtpol\source\repos\3DCollectathon\My project
   m_LockTracker:
@@ -709,14 +709,14 @@ MonoBehaviour:
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs:
-    - m_Data: 65904
+    - m_Data: 49554
     m_LastClickedID:
-      m_Data: 65904
+      m_Data: 49554
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 65840
-    - m_Data: 65850
-    - m_Data: 65906
+    - m_Data: 49178
+    - m_Data: 49498
+    - m_Data: 49558
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -749,7 +749,9 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs: []
+    m_ExpandedIDs:
+    - m_Data: 0
+    - m_Data: 49178
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -776,8 +778,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs:
+    - m_Data: -3454
+    m_LastClickedInstanceID: -3454
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -901,11 +904,12 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: []
+      m_SelectedIDs:
+      - m_Data: -3454
       m_LastClickedID:
-        m_Data: 0
+        m_Data: -3454
       m_ExpandedIDs:
-      - m_Data: -51262
+      - m_Data: -1300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1540,9 +1544,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 7.0385036, y: -1.0963321, z: -1.1071806}
+    m_Target: {x: 77.07413, y: -22.47129, z: 31.363247}
     speed: 2
-    m_Value: {x: 7.0385036, y: -1.0963321, z: -1.1071806}
+    m_Value: {x: 77.07413, y: -22.47129, z: 31.363247}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1588,13 +1592,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.048371196, y: -0.9409784, z: 0.15263604, w: -0.29820225}
+    m_Target: {x: -0.12290471, y: -0.5865385, z: 0.09063342, w: -0.7953913}
     speed: 2
-    m_Value: {x: -0.04837114, y: -0.9409773, z: 0.15263586, w: -0.2982019}
+    m_Value: {x: -0.122768946, y: -0.5877325, z: 0.09081791, w: -0.7945127}
   m_Size:
-    m_Target: 9.24562
+    m_Target: 41.29428
     speed: 2
-    m_Value: 9.24562
+    m_Value: 41.29428
   m_Ortho:
     m_Target: 0
     speed: 2
