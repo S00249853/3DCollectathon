@@ -281,7 +281,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (!_characterController.isGrounded && hit.normal.y < 0.1f && !_isDashing && hit.gameObject.tag != "MovingPlatform")
+        if (!_characterController.isGrounded && hit.normal.y < 0.1f && !_isDashing && hit.gameObject.tag != "NonStick")
         {
             _wall = hit;
             _onWall = true;
@@ -298,6 +298,17 @@ public class PlayerStateMachine : MonoBehaviour
                     OnBounce(10f);
                 }
             }
+
+            if (hit.gameObject.tag == "Spring")
+            {
+                OnBounce(30f);
+            }
+        }
+
+        if (hit.normal.y > 0.6f && hit.gameObject.tag == "Cannonball")
+        {
+            OnBounce(10f);
+            hit.gameObject.SetActive(false);
         }
     }
     private void Update()

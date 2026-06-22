@@ -12,6 +12,22 @@ public class PlayerCollision : MonoBehaviour
         playerCollectables = GetComponent<PlayerCollectables>();
         playerStateMachine = GetComponent<PlayerStateMachine>();
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.gameObject.tag == "Cannonball")
+        {
+            Debug.Log("Cannonball Hit");
+            Vector3 hitDirection = collision.gameObject.transform.forward;
+            if (hitDirection.y <= 0.8)
+            {
+                hitDirection = hitDirection.normalized;
+                playerStateMachine.OnHurt(hitDirection);
+                collision.gameObject.SetActive(false);
+            }
+        }
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {

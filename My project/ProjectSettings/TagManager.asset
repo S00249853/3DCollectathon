@@ -8,6 +8,9 @@ TagManager:
   - Coin
   - Enemy
   - MovingPlatform
+  - NonStick
+  - Cannonball
+  - Spring
   layers:
   - Default
   - TransparentFX
