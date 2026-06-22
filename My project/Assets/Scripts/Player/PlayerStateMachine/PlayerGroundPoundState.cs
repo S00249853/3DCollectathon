@@ -15,6 +15,14 @@ public class PlayerGroundPoundState : PlayerBaseState
         {
             SwitchState(Factory.Grounded());
         }
+        else if (Ctx.IsHurt)
+        {
+            SwitchState(Factory.Knockback());
+        }
+        else if (Ctx.IsBounce)
+        {
+            SwitchState(Factory.Bounce());
+        }
     }
 
     public override void EnterState()

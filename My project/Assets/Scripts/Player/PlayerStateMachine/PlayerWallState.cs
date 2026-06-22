@@ -21,6 +21,18 @@ public class PlayerWallState : PlayerBaseState
         {
             SwitchState(Factory.WallJump());
         }
+        else if (Ctx.IsHurt)
+        {
+            SwitchState(Factory.Knockback());
+        }
+        else if (Ctx.IsBounce)
+        {
+            SwitchState(Factory.Bounce());
+        }
+        else if (!Ctx.OnWall)
+        {
+            SwitchState(Factory.Fall());
+        }
     }
 
     public override void EnterState()

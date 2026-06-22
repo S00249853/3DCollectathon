@@ -9,7 +9,7 @@ public class GroundEnemyChaseState : EnemyBaseState
 
     public override void CheckSwitchState()
     {
-        if (Vector3.Distance(Ctx.Home, Ctx.transform.position) >= Ctx.HomeRadius)
+        if (Vector3.Distance(Ctx.Home, Ctx.transform.position) >= Ctx.HomeRadius || Ctx.PlayerMachine.IsHurt)
         {
             SwitchState(Factory.Patrol());
         }

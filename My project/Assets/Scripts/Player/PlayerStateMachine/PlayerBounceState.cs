@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerWallJumpState : PlayerBaseState
+public class PlayerBounceState : PlayerBaseState
 {
-    public PlayerWallJumpState(PlayerStateMachine ctx, PlayerStateFactory factory) : base(ctx, factory)
+    public PlayerBounceState(PlayerStateMachine ctx, PlayerStateFactory factory) : base(ctx, factory)
     {
         IsRootState = true;
     }
@@ -13,13 +13,13 @@ public class PlayerWallJumpState : PlayerBaseState
         {
             SwitchState(Factory.Grounded());
         }
-        else if (Ctx.IsGroundPounding)
-        {
-            SwitchState(Factory.GroundPound());
-        }
         else if (Ctx.IsDashing)
         {
             SwitchState(Factory.Dash());
+        }
+        else if (Ctx.IsGroundPounding)
+        {
+            SwitchState(Factory.GroundPound());
         }
         else if (Ctx.OnWall)
         {
@@ -29,24 +29,18 @@ public class PlayerWallJumpState : PlayerBaseState
         {
             SwitchState(Factory.Knockback());
         }
-        else if (Ctx.IsBounce)
-        {
-            SwitchState(Factory.Bounce());
-        }
     }
 
     public override void EnterState()
     {
         InitializeSubState();
-        HandleWallJump();
-        Ctx.WallJump = false;
-        Ctx.FreezeMovement = true;
+        HandleBounce();
     }
 
     public override void ExitState()
     {
-        Ctx.FreezeMovement = false;
-        Ctx.MovementVelocity = Vector3.zero;
+        Ctx.BounceAmount = 0;
+        Ctx.IsBounce = false;
     }
 
     public override void InitializeSubState()
@@ -60,32 +54,26 @@ public class PlayerWallJumpState : PlayerBaseState
         CheckSwitchState();
     }
 
-    private void HandleWallJump()
+    void HandleBounce()
     {
-       Vector3 wallJumpForce = Ctx.Wall.normal * Ctx.WalkSpeed;
-
-        Ctx.CurrentMovementY = Ctx.InitialJumpVelocities[1] / 1.1f;
-        Ctx.AppliedMovementY = Ctx.InitialJumpVelocities[1] / 1.1f;
-     
-        Ctx.MovementVelocity = wallJumpForce;
+        Ctx.CurrentMovementY = Ctx.BounceAmount;
+        Ctx.AppliedMovementY = Ctx.BounceAmount;
     }
     private void HandleGravity()
     {
-        bool isFalling = Ctx.CurrentMovementY <= 0.0f;
+        bool isFalling = Ctx.CurrentMovementY <= 0.0f || !Ctx.IsJumpPressed;
         float fallMultiplier = 2.0f;
 
         if (isFalling)
         {
-            Ctx.FreezeMovement = false;
-            Ctx.MovementVelocity = Vector3.zero;
             float previousYVelocity = Ctx.CurrentMovementY;
-            Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.JumpGravities[1] * fallMultiplier * Time.deltaTime);
+            Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.JumpGravities[Ctx.JumpCount] * fallMultiplier * Time.deltaTime);
             Ctx.AppliedMovementY = Mathf.Max((previousYVelocity + Ctx.CurrentMovementY) * .5f, -20.0f);
         }
         else
         {
             float previousYVelocity = Ctx.CurrentMovementY;
-            Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.JumpGravities[1] * Time.deltaTime);
+            Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.JumpGravities[Ctx.JumpCount] * Time.deltaTime);
             Ctx.AppliedMovementY = (previousYVelocity + Ctx.CurrentMovementY) * .5f;
         }
     }

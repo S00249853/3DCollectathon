@@ -15,6 +15,11 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void EnterState() {
         InitializeSubState();
+        Ctx.JumpBufferTimer = 0;
+        if (Ctx.JumpCount == 3)
+        {
+            Ctx.JumpCount = 0;
+        }
         HandleJump();
         Debug.Log("Jump State Entered");
     }
@@ -25,11 +30,7 @@ public override void UpdateState()
         CheckSwitchState();
     }
 
-public override void ExitState() { 
-        if (Ctx.IsJumpPressed)
-        {
-            Ctx.RequireNewJumpPress = true;
-        }
+public override void ExitState() {
         Ctx.CurrentJumpResetRoutine = Ctx.StartCoroutine(JumpResetRoutine());
         if (Ctx.JumpCount == 3)
         {
@@ -53,6 +54,14 @@ public override void CheckSwitchState() {
         else if (Ctx.OnWall)
         {
             SwitchState(Factory.Wall());
+        }
+        else if (Ctx.IsHurt)
+        {
+            SwitchState(Factory.Knockback());
+        }
+        else if (Ctx.IsBounce)
+        {
+            SwitchState(Factory.Bounce());
         }
     }
 

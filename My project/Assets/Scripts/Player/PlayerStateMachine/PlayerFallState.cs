@@ -25,6 +25,14 @@ public class PlayerFallState : PlayerBaseState
         {
             SwitchState(Factory.Wall());
         }
+        else if (Ctx.IsHurt)
+        {
+            SwitchState(Factory.Knockback());
+        }
+        else if (Ctx.IsBounce)
+        {
+            SwitchState(Factory.Bounce());
+        }
     }
 
     public override void EnterState()

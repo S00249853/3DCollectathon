@@ -20,6 +20,14 @@ public class PlayerDashState : PlayerBaseState
         {
             SwitchState(Factory.Fall());
         }
+        else if (Ctx.IsHurt)
+        {
+            SwitchState(Factory.Knockback());
+        }
+        else if (Ctx.IsBounce)
+        {
+            SwitchState(Factory.Bounce());
+        }
     }
 
     public override void EnterState()
