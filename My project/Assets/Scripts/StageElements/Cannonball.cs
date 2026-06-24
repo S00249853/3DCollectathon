@@ -30,4 +30,9 @@ public class Cannonball : MonoBehaviour
         _elapsedTime = 0;
         transform.position = Start;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        gameObject.SetActive(false);
+    }
 }

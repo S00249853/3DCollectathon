@@ -303,6 +303,11 @@ public class PlayerStateMachine : MonoBehaviour
             {
                 OnBounce(30f);
             }
+
+            if (IsGroundPounding && hit.gameObject.tag == "Cracked")
+            {
+                Destroy(hit.gameObject);
+            }
         }
 
         if (hit.normal.y > 0.6f && hit.gameObject.tag == "Cannonball")
