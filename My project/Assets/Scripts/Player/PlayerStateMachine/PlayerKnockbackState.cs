@@ -30,6 +30,10 @@ public class PlayerKnockbackState : PlayerBaseState
         {
             SwitchState(Factory.Grounded());
         }
+        else if (Ctx.ChangingScenes)
+        {
+            SwitchState(Factory.ChangeScene());
+        }
     }
 
     public override void EnterState()

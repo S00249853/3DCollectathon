@@ -227,6 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateMachine
   _characterController: {fileID: 1614779389037318039}
+  _mainCamera: {fileID: 0}
+  _climbCamera: {fileID: 0}
   walkSpeed: 10.13
   DashSpeed: 0
   dashForce: 40
@@ -235,7 +237,6 @@ MonoBehaviour:
   dashCd: 0.75
   FlipCd: 0
   CanSideflip: 0
-  _onWall: 0
   _dashCdTimer: 0
   _isDashing: 0
   _isCrouching: 0

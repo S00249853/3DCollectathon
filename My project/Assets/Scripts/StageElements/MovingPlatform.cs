@@ -3,6 +3,7 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] Transform[] _waypoints;
+    CharacterController _player;
     Transform _previousWaypoint;
     Transform _targetWaypoint;
     int _index;
@@ -52,9 +53,10 @@ public class MovingPlatform : MonoBehaviour
        
         if (other.gameObject.tag == "Player")
         {
+            _player = other.gameObject.GetComponent<CharacterController>();
             Debug.Log("Platform Entered");
             Debug.Log($"Parent is {other.gameObject.transform.parent}");
-            other.transform.SetParent(transform);
+            _player.transform.SetParent(transform);
             Debug.Log($"Parent now is {other.gameObject.transform.parent}");
         }
         

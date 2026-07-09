@@ -48,10 +48,35 @@ public class PlayerCollision : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (other.gameObject.tag == "Climbable")
+        {
+            RaycastHit hit;
+            Physics.Raycast(gameObject.transform.position, other.transform.position, out hit);
+            playerStateMachine.Hit = hit;
+            playerStateMachine.IsClimb = true;
+        }
+
+        if (other.gameObject.tag == "Teleporter")
+        {
+            Teleporter teleporter = other.gameObject.GetComponent<Teleporter>();
+            CharacterController characterController = GetComponent<CharacterController>();
+            characterController.enabled = false;
+            characterController.transform.position = teleporter.TeleportSpawn.position;
+            characterController.enabled = true;
+            Debug.Log($"Teleport successful, player now at {characterController.transform.position}");
+        }
+
+        if (other.gameObject.tag == "Checkpoint")
+        {
+            playerStateMachine.Checkpoint = other.transform;
+            Debug.Log($"Checkpoint is {playerStateMachine.Checkpoint.position}");
+        }
+
+      
         //if (other.gameObject.tag == "MovingPlatform")
         //{
         //    Debug.Log("Should be colliding");
-            
+
         //    transform.SetParent(other.transform) ;
         //}
 
@@ -62,12 +87,25 @@ public class PlayerCollision : MonoBehaviour
         //}
     }
 
-    //private void OnTriggerExit(Collider other)
+    //private void OnTriggerStay(Collider other)
     //{
-    //    if (other.gameObject.tag == "MovingPlatform")
+    //    if (other.gameObject.tag == "Climbable")
     //    {
-    //        Debug.Log("Should be OVER");
-    //        transform.parent = null;
+
     //    }
     //}
+
+    private void OnTriggerExit(Collider other)
+    {
+        //if (other.gameObject.tag == "MovingPlatform")
+        //{
+        //    Debug.Log("Should be OVER");
+        //    transform.parent = null;
+        //}
+
+        if (other.gameObject.tag == "Climbable")
+        {
+            playerStateMachine.IsClimb = false;
+        }
+    }
 }

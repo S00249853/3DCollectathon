@@ -12,6 +12,11 @@ TagManager:
   - Cannonball
   - Spring
   - Cracked
+  - Ladder
+  - Climbable
+  - Persistor
+  - Teleporter
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

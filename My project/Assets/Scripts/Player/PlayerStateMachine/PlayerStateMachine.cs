@@ -3,12 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStateMachine : MonoBehaviour
 {
 
     //Character Controller
     [SerializeField] private CharacterController _characterController;
+
+    [SerializeField] private CinemachineCamera _mainCamera;
+    [SerializeField] private CinemachineCamera _climbCamera;
 
     //Movement Variables
     public Vector3 Velocity { get { return _characterController.velocity; } }
@@ -20,6 +25,8 @@ public class PlayerStateMachine : MonoBehaviour
     private float _currentSpeed;
     private bool _isMovementPressed;
     private bool _freezeMovement;
+    private bool _isClimb;
+    private bool _climbDelay;
     Vector3 _cameraRelativeMovement;
 
     //Editable Variables
@@ -52,7 +59,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     //Miscellanious Variables
     public bool CanSideflip;
-    public bool _onWall;
+    private bool _onWall;
     [SerializeField]private float _dashCdTimer;
     float _rotationFactorPerFrame = 15.0f;
     private Vector3 _wallJumpForce;
@@ -61,6 +68,7 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField]private bool _isCrouching;
     [SerializeField] private bool _isGroundPounding;
     private ControllerColliderHit _wall;
+    private RaycastHit _hit;
     private Vector3 _hurtDirection;
     private bool _isHurt;
     private float _bounceAmount;
@@ -68,8 +76,13 @@ public class PlayerStateMachine : MonoBehaviour
     Coroutine _flickerRoutine = null;
     Coroutine _invunerableRoutine = null;
     Coroutine _coyoteRoutine = null;
+    Coroutine _climbRoutine = null;
     MeshRenderer _meshRenderer;
     private bool _invunerable;
+    string _spawnPoint;
+    bool _changingScenes;
+    Transform _checkpoint;
+
 
 
     //State Variables
@@ -78,14 +91,19 @@ public class PlayerStateMachine : MonoBehaviour
 
     //Getters and Setters
     public CharacterController CharacterController { get { return _characterController; } }
+    public string SpawnPoint { get { return _spawnPoint; } set { _spawnPoint = value; } }
+    public CinemachineCamera MainCamera { get { return _mainCamera; } set { _mainCamera = value; } }
+    public CinemachineCamera ClimbCamera { get { return _climbCamera; } set { _climbCamera = value; } }
     public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
     public MeshRenderer MeshRenderer { get { return _meshRenderer; } set { _meshRenderer = value; } }
     public Coroutine CurrentJumpResetRoutine { get {  return _currentJumpResetRoutine; } set { _currentJumpResetRoutine = value; } }
     public Coroutine FlickerRoutine { get { return _flickerRoutine; } set { _flickerRoutine = value; } }
     public Coroutine InvunerableRoutine { get { return _invunerableRoutine; } set { _invunerableRoutine = value; } } 
     public Coroutine CoyoteRoutine { get { return _coyoteRoutine; } set { _coyoteRoutine = value; } }
-   public Dictionary<int, float> InitialJumpVelocities { get { return _initialJumpVelocities; } }
+    public Coroutine ClimbRoutine { get { return _climbRoutine; } set { _climbRoutine = value; } }
+    public Dictionary<int, float> InitialJumpVelocities { get { return _initialJumpVelocities; } }
     public Dictionary<int, float> JumpGravities { get { return _jumpGravities; } }
+   public Transform Checkpoint { get { return _checkpoint; } set { _checkpoint = value; } }
     public int JumpCount {  get { return _jumpCount; } set { _jumpCount = value; } }
     public bool IsJumping { set { _isJumping = value; } }
     public bool IsJumpPressed { get { return _isJumpPressed; } }
@@ -95,11 +113,14 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsDashing { get { return _isDashing; } set  { _isDashing = value; } }
     public bool IsHurt { get { return _isHurt; } set { _isHurt = value; } }
     public bool IsBounce { get { return _isBounce; } set { _isBounce = value; } }
+    public bool IsClimb { get { return _isClimb; } set { _isClimb = value; } }
     public bool OnWall { get { return _onWall; } set { _onWall = value; } }
     public bool WallJump { get { return _wallJump; } set { _wallJump = value; } }
     public bool ShouldJump { get { return _shouldJump; } set { _shouldJump = value; } }
     public bool FreezeMovement { get { return _freezeMovement; } set { _freezeMovement = value; } }
     public bool Invunerable { get { return _invunerable; } set { _invunerable = value; } }
+    public bool ClimbDelay { get { return _climbDelay; } set { _climbDelay = value; } }
+    public bool ChangingScenes { get { return _changingScenes; } set { _changingScenes = value; } }
     public float CurrentMovementY { get { return _movement.y; } set { _movement.y = value; } }
     public float CurrentMovementX { get { return _movement.x; } set { _movement.x = value; } }
     public float CurrentMovementZ { get { return _movement.z; } set { _movement.z = value; } }
@@ -121,6 +142,7 @@ public class PlayerStateMachine : MonoBehaviour
     public Vector3 HurtDirection { get { return _hurtDirection; } set { _hurtDirection = value; } }
     public Vector2 MovementInput { get { return _movementInput; } }
     public ControllerColliderHit Wall { get { return _wall; } }
+    public RaycastHit Hit { get { return _hit; } set { _hit = value; } }
 
     private void Awake()
     {
@@ -138,6 +160,9 @@ public class PlayerStateMachine : MonoBehaviour
     private void Start()
     {
         _characterController.Move(_appliedMovement * Time.deltaTime);
+
+        _checkpoint = transform;
+        Debug.Log($"Checkpoint is {_checkpoint.position}");
     }
 
     private void SetupJumpVariables()
@@ -239,6 +264,13 @@ public class PlayerStateMachine : MonoBehaviour
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
         }
 
+        else if (_isClimb)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(-_hit.normal);
+
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
+        }
+
         else if (_isMovementPressed)
         {
             Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
@@ -281,7 +313,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (!_characterController.isGrounded && hit.normal.y < 0.1f && !_isDashing && hit.gameObject.tag != "NonStick")
+        if (!_characterController.isGrounded && hit.normal.y < 0.1f && !_isDashing && hit.gameObject.tag != "NonStick" && hit.gameObject.tag != "NonStick" && hit.gameObject.tag != "Climbable")
         {
             _wall = hit;
             _onWall = true;
@@ -326,8 +358,11 @@ public class PlayerStateMachine : MonoBehaviour
             JumpCount = 0;
         }
 
-        _cameraRelativeMovement = ConvertToCameraSpace(_appliedMovement);
-        _characterController.Move((_cameraRelativeMovement + _movementVelocity) * Time.deltaTime);
-        HandleTimers();
+        if (!ChangingScenes)
+        {
+            _cameraRelativeMovement = ConvertToCameraSpace(_appliedMovement);
+            _characterController.Move((_cameraRelativeMovement + _movementVelocity) * Time.deltaTime);
+        }
+            HandleTimers();
     }
 }

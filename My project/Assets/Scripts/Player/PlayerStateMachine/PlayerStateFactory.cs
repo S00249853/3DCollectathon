@@ -12,7 +12,9 @@ enum PlayerStates
     wall,
     wallJump,
     knockback,
-    bounce
+    bounce,
+    climb,
+    changeScene
 }
 
 public class PlayerStateFactory 
@@ -33,6 +35,8 @@ public class PlayerStateFactory
         _states[PlayerStates.wallJump] = new PlayerWallJumpState(_context, this);
         _states[PlayerStates.knockback] = new PlayerKnockbackState(_context, this);
         _states[PlayerStates.bounce] = new PlayerBounceState(_context, this);
+        _states[PlayerStates.climb] = new PlayerClimbState(_context, this);
+        _states[PlayerStates.changeScene] = new PlayerChangeSceneState(_context, this);
     }
 
     public PlayerBaseState Move()
@@ -82,5 +86,13 @@ public class PlayerStateFactory
     public PlayerBaseState Bounce()
     {
         return _states[PlayerStates.bounce];
+    }
+    public PlayerBaseState Climb()
+    {
+        return _states[PlayerStates.climb];
+    }
+    public PlayerBaseState ChangeScene()
+    {
+        return _states[PlayerStates.changeScene];
     }
 }

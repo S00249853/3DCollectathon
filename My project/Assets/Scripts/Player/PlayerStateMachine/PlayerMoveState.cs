@@ -11,12 +11,18 @@ public class PlayerMoveState : PlayerBaseState
     }
 
     public override void UpdateState() {
-        if (!Ctx.FreezeMovement)
+        if (!Ctx.FreezeMovement && !Ctx.IsClimb || !Ctx.FreezeMovement && Ctx.IsClimb && Ctx.CharacterController.isGrounded && Ctx.ClimbDelay == true)
         {
             Ctx.AppliedMovementX = Ctx.MovementInput.x * Ctx.WalkSpeed;
             Ctx.AppliedMovementZ = Ctx.MovementInput.y * Ctx.WalkSpeed;
         }
-        CheckSwitchState();
+        else if (!Ctx.FreezeMovement && Ctx.IsClimb)
+        {
+            Ctx.AppliedMovementY = Ctx.MovementInput.y * Ctx.WalkSpeed / 2;
+            Ctx.AppliedMovementX = Ctx.MovementInput.x * Ctx.WalkSpeed / 2;
+
+        }
+            CheckSwitchState();
     }
 
     public override void ExitState() { }

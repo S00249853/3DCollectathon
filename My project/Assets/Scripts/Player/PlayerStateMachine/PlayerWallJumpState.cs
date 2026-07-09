@@ -33,6 +33,14 @@ public class PlayerWallJumpState : PlayerBaseState
         {
             SwitchState(Factory.Bounce());
         }
+        else if (Ctx.IsClimb)
+        {
+            SwitchState(Factory.Climb());
+        }
+        else if (Ctx.ChangingScenes)
+        {
+            SwitchState(Factory.ChangeScene());
+        }
     }
 
     public override void EnterState()

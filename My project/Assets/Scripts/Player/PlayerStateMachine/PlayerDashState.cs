@@ -28,6 +28,10 @@ public class PlayerDashState : PlayerBaseState
         {
             SwitchState(Factory.Bounce());
         }
+        else if (Ctx.ChangingScenes)
+        {
+            SwitchState(Factory.ChangeScene());
+        }
     }
 
     public override void EnterState()
