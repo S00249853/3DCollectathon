@@ -12,7 +12,7 @@ public class PlayerDashState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-       if (!Ctx.IsDashing && Ctx.CharacterController.isGrounded)
+       if (!Ctx.IsDashing && Ctx.CharacterController.isGrounded || Ctx.IsDead)
         {
            SwitchState(Factory.Grounded());
         }
@@ -28,7 +28,7 @@ public class PlayerDashState : PlayerBaseState
         {
             SwitchState(Factory.Bounce());
         }
-        else if (Ctx.ChangingScenes)
+        else if (Ctx.StopMoving)
         {
             SwitchState(Factory.ChangeScene());
         }
@@ -37,6 +37,7 @@ public class PlayerDashState : PlayerBaseState
     public override void EnterState()
     {
         InitializeSubState();
+        Ctx.CanDash = false;
         Debug.Log("Dashing");
         HandleDash();
     }

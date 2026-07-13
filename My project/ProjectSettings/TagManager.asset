@@ -17,6 +17,7 @@ TagManager:
   - Persistor
   - Teleporter
   - Checkpoint
+  - Boundary
   layers:
   - Default
   - TransparentFX

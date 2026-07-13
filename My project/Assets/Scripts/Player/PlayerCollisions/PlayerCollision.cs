@@ -22,7 +22,7 @@ public class PlayerCollision : MonoBehaviour
             if (hitDirection.y <= 0.8)
             {
                 hitDirection = hitDirection.normalized;
-                playerStateMachine.OnHurt(hitDirection);
+                playerStateMachine.OnHurt(hitDirection, 10);
                 collision.gameObject.SetActive(false);
             }
         }
@@ -68,8 +68,23 @@ public class PlayerCollision : MonoBehaviour
 
         if (other.gameObject.tag == "Checkpoint")
         {
-            playerStateMachine.Checkpoint = other.transform;
-            Debug.Log($"Checkpoint is {playerStateMachine.Checkpoint.position}");
+            //playerStateMachine.Checkpoint = other.transform;
+            GameManager.Instance.Checkpoint = other.transform;
+            Debug.Log($"Checkpoint is {GameManager.Instance.Checkpoint.position}");
+        }
+
+        if ( other.gameObject.tag == "Boundary")
+        {
+            // playerStateMachine.Health = 0;
+            Debug.Log("Is Collision Happening?");
+            Transform respawnPoint = GameManager.Instance.Checkpoint;
+            CharacterController characterController = GetComponent<CharacterController>();
+            playerStateMachine.StopMoving = true;
+            characterController.enabled = false;
+            characterController.transform.position = respawnPoint.position;
+            characterController.enabled = true;
+            playerStateMachine.StopMoving = false;
+            Debug.Log("Damn...");
         }
 
       

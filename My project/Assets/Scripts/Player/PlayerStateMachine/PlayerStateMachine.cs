@@ -57,17 +57,20 @@ public class PlayerStateMachine : MonoBehaviour
     Coroutine _currentJumpResetRoutine = null;
     Coroutine _jumpBufferRoutine = null;
 
+    //Wall and Climbing Variables
+    private bool _onWall;
+    private ControllerColliderHit _wall;
+    Coroutine _climbRoutine = null;
+
     //Miscellanious Variables
     public bool CanSideflip;
-    private bool _onWall;
     [SerializeField]private float _dashCdTimer;
     float _rotationFactorPerFrame = 15.0f;
     private Vector3 _wallJumpForce;
     private float _flipCdTimer;
-    [SerializeField]private bool _isDashing;
+   
     [SerializeField]private bool _isCrouching;
     [SerializeField] private bool _isGroundPounding;
-    private ControllerColliderHit _wall;
     private RaycastHit _hit;
     private Vector3 _hurtDirection;
     private bool _isHurt;
@@ -76,7 +79,6 @@ public class PlayerStateMachine : MonoBehaviour
     Coroutine _flickerRoutine = null;
     Coroutine _invunerableRoutine = null;
     Coroutine _coyoteRoutine = null;
-    Coroutine _climbRoutine = null;
     MeshRenderer _meshRenderer;
     private bool _invunerable;
     string _spawnPoint;
@@ -84,6 +86,14 @@ public class PlayerStateMachine : MonoBehaviour
     Transform _checkpoint;
 
 
+    //Dashing Variables
+    bool _canDash;
+    #
+
+    //Health Variables#
+    int _maxHealth = 100;
+    [SerializeField] int _health;
+    bool _isDead;
 
     //State Variables
     PlayerBaseState _currentState;
@@ -106,7 +116,7 @@ public class PlayerStateMachine : MonoBehaviour
    public Transform Checkpoint { get { return _checkpoint; } set { _checkpoint = value; } }
     public int JumpCount {  get { return _jumpCount; } set { _jumpCount = value; } }
     public bool IsJumping { set { _isJumping = value; } }
-    public bool IsJumpPressed { get { return _isJumpPressed; } }
+    public bool IsJumpPressed { get { return _isJumpPressed; } } 
     public bool IsMovementPressed {  get { return _isMovementPressed; } }
     public bool IsCrouching { get {  return _isCrouching; } set { _isCrouching = value; } }
     public bool IsGroundPounding { get { return _isGroundPounding; } set { _isGroundPounding = value; } }
@@ -114,13 +124,15 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsHurt { get { return _isHurt; } set { _isHurt = value; } }
     public bool IsBounce { get { return _isBounce; } set { _isBounce = value; } }
     public bool IsClimb { get { return _isClimb; } set { _isClimb = value; } }
+    public bool IsDead { get { return _isDead; } set { _isDead = value; } }
     public bool OnWall { get { return _onWall; } set { _onWall = value; } }
     public bool WallJump { get { return _wallJump; } set { _wallJump = value; } }
     public bool ShouldJump { get { return _shouldJump; } set { _shouldJump = value; } }
     public bool FreezeMovement { get { return _freezeMovement; } set { _freezeMovement = value; } }
     public bool Invunerable { get { return _invunerable; } set { _invunerable = value; } }
     public bool ClimbDelay { get { return _climbDelay; } set { _climbDelay = value; } }
-    public bool ChangingScenes { get { return _changingScenes; } set { _changingScenes = value; } }
+    public bool StopMoving { get { return _changingScenes; } set { _changingScenes = value; } }
+    public bool CanDash { get { return _canDash; } set { _canDash = value; } }
     public float CurrentMovementY { get { return _movement.y; } set { _movement.y = value; } }
     public float CurrentMovementX { get { return _movement.x; } set { _movement.x = value; } }
     public float CurrentMovementZ { get { return _movement.z; } set { _movement.z = value; } }
@@ -137,6 +149,8 @@ public class PlayerStateMachine : MonoBehaviour
     public float DashDuration { get { return dashDuration; } }
     public float MaxJumpTime { get { return _maxJumpTime; } }
     public float BounceAmount { get { return _bounceAmount; } set { _bounceAmount = value; } }
+    public int MaxHealth { get { return _maxHealth; } set { _maxHealth = value; } }
+    public int Health { get { return _health; } set { _health = value; } }
     public Vector3 MovementVelocity { get { return _movementVelocity; } set { _movementVelocity = value; } }
     public Vector3 AppliedMovement { get { return _cameraRelativeMovement; } set { _cameraRelativeMovement = value; } }
     public Vector3 HurtDirection { get { return _hurtDirection; } set { _hurtDirection = value; } }
@@ -154,13 +168,14 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState = _states.Grounded();
         _currentState.EnterState();
 
+        _health = _maxHealth;
+
         SetupJumpVariables();
     }
 
     private void Start()
     {
         _characterController.Move(_appliedMovement * Time.deltaTime);
-
         _checkpoint = transform;
         Debug.Log($"Checkpoint is {_checkpoint.position}");
     }
@@ -218,18 +233,19 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext obj)
     {
-        if (_dashCdTimer <= 0)
+        if (_dashCdTimer <= 0 && _canDash)
         {
             IsDashing = true;
         }
       
     }
 
-    public void OnHurt(Vector3 hurtDirection)
+    public void OnHurt(Vector3 hurtDirection, int damage)
     {
         if (!_invunerable)
         {
             _hurtDirection = hurtDirection;
+            _health -= damage;
             _isHurt = true;
         }
     }
@@ -238,6 +254,19 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _bounceAmount = bounceAmount;
         _isBounce = true;
+    }
+
+    public void OnDeath()
+    {
+        Debug.Log($"player died at {_characterController.transform.position} and is respawning");
+        _isDead = false;
+        _characterController.enabled = false;
+        _characterController.transform.position = _checkpoint.position;
+        Debug.Log($"player respawned at {_characterController.transform.position}");
+       
+        _characterController.enabled = true;
+        _health = _maxHealth;
+        Debug.Log($"player is at {_characterController.transform.position}");
     }
 
     public void ResetDash()
@@ -350,6 +379,12 @@ public class PlayerStateMachine : MonoBehaviour
     }
     private void Update()
     {
+        //if (_health <= 0)
+        //{
+        //    _isDead = true;
+        //    OnDeath();
+        //}
+
         HandleRotation();
         _currentState.UpdateStates();
 
@@ -357,8 +392,8 @@ public class PlayerStateMachine : MonoBehaviour
         {
             JumpCount = 0;
         }
-
-        if (!ChangingScenes)
+         
+        if (!StopMoving)
         {
             _cameraRelativeMovement = ConvertToCameraSpace(_appliedMovement);
             _characterController.Move((_cameraRelativeMovement + _movementVelocity) * Time.deltaTime);

@@ -9,7 +9,7 @@ public class PlayerWallState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-         if (Ctx.CharacterController.isGrounded)
+         if (Ctx.CharacterController.isGrounded || Ctx.IsDead)
         {
             SwitchState(Factory.Grounded());
         }
@@ -37,7 +37,7 @@ public class PlayerWallState : PlayerBaseState
         {
             SwitchState(Factory.Climb());
         }
-        else if (Ctx.ChangingScenes)
+        else if (Ctx.StopMoving)
         {
             SwitchState(Factory.ChangeScene());
         }

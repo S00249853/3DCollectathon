@@ -11,7 +11,7 @@ public class PlayerGroundPoundState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (Ctx.CharacterController.isGrounded)
+        if (Ctx.CharacterController.isGrounded || Ctx.IsDead)
         {
             SwitchState(Factory.Grounded());
         }
@@ -23,7 +23,7 @@ public class PlayerGroundPoundState : PlayerBaseState
         {
             SwitchState(Factory.Bounce());
         }
-        else if (Ctx.ChangingScenes)
+        else if (Ctx.StopMoving)
         {
             SwitchState(Factory.ChangeScene());
         }

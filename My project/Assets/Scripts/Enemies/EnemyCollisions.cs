@@ -18,7 +18,7 @@ public class EnemyCollisions : MonoBehaviour
             {
                 _playerStateMachine = collision.gameObject.GetComponent<PlayerStateMachine>();
                 hitDirection = hitDirection.normalized;
-                _playerStateMachine.OnHurt(hitDirection);
+                _playerStateMachine.OnHurt(hitDirection, 10);
             }
         }
     }

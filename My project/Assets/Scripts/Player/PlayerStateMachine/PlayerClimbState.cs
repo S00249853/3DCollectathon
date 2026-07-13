@@ -15,7 +15,7 @@ public class PlayerClimbState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (!Ctx.IsClimb && Ctx.CharacterController.isGrounded)
+        if (!Ctx.IsClimb && Ctx.CharacterController.isGrounded || Ctx.IsDead)
         {
             SwitchState(Factory.Grounded());
         }
@@ -27,7 +27,7 @@ public class PlayerClimbState : PlayerBaseState
         {
             SwitchState(Factory.Knockback());
         }
-        else if (Ctx.ChangingScenes)
+        else if (Ctx.StopMoving)
         {
             SwitchState(Factory.ChangeScene());
         }

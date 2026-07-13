@@ -26,11 +26,11 @@ public class PlayerKnockbackState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-       if (Ctx.CharacterController.isGrounded && !Ctx.IsHurt)
+       if (Ctx.CharacterController.isGrounded && !Ctx.IsHurt || Ctx.IsDead)
         {
             SwitchState(Factory.Grounded());
         }
-        else if (Ctx.ChangingScenes)
+        else if (Ctx.StopMoving)
         {
             SwitchState(Factory.ChangeScene());
         }

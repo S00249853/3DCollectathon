@@ -21,7 +21,7 @@ public class SceneFader : MonoBehaviour
         if (other.tag == "Player")
         {  
             PlayerStateMachine player = other.gameObject.GetComponent<PlayerStateMachine>();
-            player.ChangingScenes = true;
+            player.StopMoving = true;
             SceneSwapManager.Instance.LoadFromTransition = true;
             SceneSwapManager.Instance.PlayersSpawn = _nextSceneSpawnerTag;
             SceneSwapManager.Instance.FadeAndLoad(_nextScene, 3);

@@ -42,6 +42,7 @@ public class SceneSwapManager : MonoBehaviour
             player.transform.position = _spawnLocation.position;
             player.enabled = true;
             Debug.Log($"Player is {_player.name} and player is at {_player.transform.position}");
+            GameManager.Instance.Checkpoint = player.transform;
             LoadFromTransition = false;
         }
         StartCoroutine(FadeOut());

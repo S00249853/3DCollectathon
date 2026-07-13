@@ -9,7 +9,7 @@ IsRootState = true;
 
     public override void CheckSwitchState()
     {
-        if (Ctx.ChangingScenes == false)
+        if (Ctx.StopMoving == false)
         {
            SwitchState(Factory.Grounded());
         }

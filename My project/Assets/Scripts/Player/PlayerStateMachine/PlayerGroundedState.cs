@@ -23,6 +23,7 @@ public class PlayerGroundedState : PlayerBaseState
         InitializeSubState();
         Ctx.CurrentMovementY = Ctx.Gravity;
         Ctx.AppliedMovementY = Ctx.Gravity;
+        Ctx.CanDash = true;
         Debug.Log("Grounded State Entered");
     }
 
@@ -52,6 +53,10 @@ public class PlayerGroundedState : PlayerBaseState
             _notCoyote = false;
             Ctx.CoyoteRoutine = Ctx.StartCoroutine(CoyoteRoutine());
         }
+    else if (Ctx.IsDead)
+        {
+            SwitchState(Factory.Grounded());
+        }
         else if (Ctx.IsDashing)
         {
             SwitchState(Factory.Dash());
@@ -68,7 +73,7 @@ public class PlayerGroundedState : PlayerBaseState
         {
             SwitchState(Factory.Climb());
         }
-        else if (Ctx.ChangingScenes)
+        else if (Ctx.StopMoving)
         {
             SwitchState(Factory.ChangeScene());
         }

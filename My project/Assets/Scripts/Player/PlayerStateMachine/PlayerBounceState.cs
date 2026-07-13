@@ -9,7 +9,7 @@ public class PlayerBounceState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (Ctx.CharacterController.isGrounded)
+        if (Ctx.CharacterController.isGrounded || Ctx.IsDead)
         {
             SwitchState(Factory.Grounded());
         }
@@ -33,7 +33,7 @@ public class PlayerBounceState : PlayerBaseState
         {
             SwitchState(Factory.Climb());
         }
-        else if (Ctx.ChangingScenes)
+        else if (Ctx.StopMoving)
         {
             SwitchState(Factory.ChangeScene());
         }
@@ -42,6 +42,7 @@ public class PlayerBounceState : PlayerBaseState
     public override void EnterState()
     {
         InitializeSubState();
+        Ctx.CanDash = true;
         HandleBounce();
     }
 
