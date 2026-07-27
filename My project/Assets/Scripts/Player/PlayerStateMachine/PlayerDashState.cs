@@ -67,13 +67,11 @@ public class PlayerDashState : PlayerBaseState
             Ctx.DashCdTimer = Ctx.DashCd;
 
             _startVelocity = Ctx.MovementVelocity;
-            //   _currentSpeed = DashSpeed;
             Vector3 forceToApply = Ctx.CharacterController.transform.forward * Ctx.DashForce + Ctx.transform.up * Ctx.DashUpwardForce;
              
             Ctx.MovementVelocity = forceToApply;
 
             Ctx.Invoke(nameof(Ctx.ResetDash), Ctx.DashDuration);
             Debug.Log("Dash should be over");
-        
     }
 }

@@ -79,10 +79,8 @@ public class PlayerGroundedState : PlayerBaseState
         }
     }
 
-    public override void InitializeSubState() { 
-    //if (Ctx.IsMovementPressed)
-    //    {
+    public override void InitializeSubState() 
+    { 
             SetSubState(Factory.Move());
-        //}
     }
 }

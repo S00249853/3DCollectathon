@@ -2,19 +2,17 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    private PlayerCollectables playerCollectables;
-    private PlayerStateMachine playerStateMachine;
-
-   
+    private PlayerStateMachine _player;
+    private CharacterController _cc;
 
     private void Awake()
     {
-        playerCollectables = GetComponent<PlayerCollectables>();
-        playerStateMachine = GetComponent<PlayerStateMachine>();
+        _player = GetComponent<PlayerStateMachine>();
+        _cc = GetComponent<CharacterController>();
     }
+
     private void OnCollisionEnter(Collision collision)
     {
-        
         if (collision.gameObject.tag == "Cannonball")
         {
             Debug.Log("Cannonball Hit");
@@ -22,105 +20,66 @@ public class PlayerCollision : MonoBehaviour
             if (hitDirection.y <= 0.8)
             {
                 hitDirection = hitDirection.normalized;
-                playerStateMachine.OnHurt(hitDirection, 10);
+                _player.OnHurt(hitDirection, 10);
                 collision.gameObject.SetActive(false);
             }
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //Handles the player collecting collectables
         if (other.gameObject.tag == "Star")
         {
             Destroy(other.gameObject);
-            playerCollectables.starCount++;
+            GameManager.Instance.Collected++;
         }
 
-        if (other.gameObject.tag == "Coin")
+        //Resets players dash in mid air
+        if (other.gameObject.tag == "DashOrb")
         {
-            Destroy(other.gameObject);
-            playerCollectables.coinCount++;
+            _player.DashCdTimer = 0;
+            _player.CanDash = true;
         }
 
         if (other.gameObject.tag == "Destroy")
         {
             Destroy(gameObject);
         }
-        if (other.gameObject.tag == "Climbable")
+
+        //Resets player upon climbing off of a climbing wall
+        if (other.gameObject.tag == "ClimbStop")
         {
-            RaycastHit hit;
-            Physics.Raycast(gameObject.transform.position, other.transform.position, out hit);
-            playerStateMachine.Hit = hit;
-            playerStateMachine.IsClimb = true;
+            Debug.Log("StopClimbing should be true");
+            _player.StopClimbing = true;
         }
 
+        //Teleports player, character controller needs to be disabled for the players transform to be changed
         if (other.gameObject.tag == "Teleporter")
         {
             Teleporter teleporter = other.gameObject.GetComponent<Teleporter>();
-            CharacterController characterController = GetComponent<CharacterController>();
-            characterController.enabled = false;
-            characterController.transform.position = teleporter.TeleportSpawn.position;
-            characterController.enabled = true;
-            Debug.Log($"Teleport successful, player now at {characterController.transform.position}");
+            _cc.enabled = false;
+            _cc.transform.position = teleporter.TeleportSpawn.position;
+            _cc.enabled = true;
+            Debug.Log($"Teleport successful, player now at {_cc.transform.position}");
         }
 
         if (other.gameObject.tag == "Checkpoint")
         {
-            //playerStateMachine.Checkpoint = other.transform;
             GameManager.Instance.Checkpoint = other.transform;
             Debug.Log($"Checkpoint is {GameManager.Instance.Checkpoint.position}");
         }
 
-        if ( other.gameObject.tag == "Boundary")
+        if (other.gameObject.tag == "Boundary")
         {
-            // playerStateMachine.Health = 0;
-            Debug.Log("Is Collision Happening?");
-            Transform respawnPoint = GameManager.Instance.Checkpoint;
-            CharacterController characterController = GetComponent<CharacterController>();
-            playerStateMachine.StopMoving = true;
-            characterController.enabled = false;
-            characterController.transform.position = respawnPoint.position;
-            characterController.enabled = true;
-            playerStateMachine.StopMoving = false;
-            Debug.Log("Damn...");
+            GameManager.Instance.Health = 0;
         }
-
-      
-        //if (other.gameObject.tag == "MovingPlatform")
-        //{
-        //    Debug.Log("Should be colliding");
-
-        //    transform.SetParent(other.transform) ;
-        //}
-
-        //if (other.gameObject.tag == "Victory")
-        //{
-        //    Destroy(other.gameObject);
-        //    pm.BaseJumpCount = 10000;
-        //}
     }
-
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Climbable")
-    //    {
-
-    //    }
-    //}
 
     private void OnTriggerExit(Collider other)
     {
-        //if (other.gameObject.tag == "MovingPlatform")
-        //{
-        //    Debug.Log("Should be OVER");
-        //    transform.parent = null;
-        //}
-
-        if (other.gameObject.tag == "Climbable")
+        if (other.gameObject.tag == "ClimbStop")
         {
-            playerStateMachine.IsClimb = false;
+            _player.StopClimbing = false;
         }
     }
 }

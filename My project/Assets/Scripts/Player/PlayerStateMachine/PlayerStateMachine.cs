@@ -12,163 +12,158 @@ public class PlayerStateMachine : MonoBehaviour
     //Character Controller
     [SerializeField] private CharacterController _characterController;
 
+    //Camera Variables
     [SerializeField] private CinemachineCamera _mainCamera;
     [SerializeField] private CinemachineCamera _climbCamera;
 
     //Movement Variables
-    public Vector3 Velocity { get { return _characterController.velocity; } }
     private Vector2 _movementInput;
-    private Vector2 _previousMovement;
-    private Vector3 _movementVelocity;
-    private Vector3 _movement;
     private Vector3 _appliedMovement;
-    private float _currentSpeed;
-    private bool _isMovementPressed;
-    private bool _freezeMovement;
-    private bool _isClimb;
+    private Vector3 _cameraRelativeMovement;
+    private Vector3 _movement;
+    private Vector3 _movementVelocity; 
     private bool _climbDelay;
-    Vector3 _cameraRelativeMovement;
+    private bool _freezeMovement;
+    private bool _isMovementPressed;
+    private float _currentSpeed;
 
     //Editable Variables
     [Header("Settings")]
-    [SerializeField] private float walkSpeed;
-    [SerializeField] private float DashSpeed;
-    [SerializeField] private float dashForce;
-    [SerializeField] private float dashUpwardForce;
-    [SerializeField] private float dashDuration;
-    [SerializeField] private float dashCd;
-    [SerializeField] private float FlipCd;
+    [SerializeField] private float _walkSpeed;
+    [SerializeField] private float _dashSpeed;
+    [SerializeField] private float _dashForce;
+    [SerializeField] private float _dashUpwardForce;
+    [SerializeField] private float _dashDuration;
+    [SerializeField] private float _dashCd;
+    [SerializeField] private float _flipCd;
 
     //Gravity Variables
     private float _gravity = -9.81f;
 
-    //Jumping Variables
+    //Jumping and Bouncing Variables
     private bool _isJumping;
     private bool _isJumpPressed;
     private bool _shouldJump;
     private bool _wallJump;
+    private float _bounceAmount;
     private float _initialJumpVelocity;
+    private float _jumpBufferTimer;
     private float _maxJumpHeight = 2f;
     private float _maxJumpTime = 1f;
-    private float _jumpBufferTimer;
     private int _jumpCount = 0;
-    Dictionary<int, float> _initialJumpVelocities = new Dictionary<int, float>();
-    Dictionary<int, float> _jumpGravities = new Dictionary<int, float>();
-    Coroutine _currentJumpResetRoutine = null;
-    Coroutine _jumpBufferRoutine = null;
+    private Dictionary<int, float> _initialJumpVelocities = new Dictionary<int, float>();
+    private Dictionary<int, float> _jumpGravities = new Dictionary<int, float>();
+    private Coroutine _coyoteRoutine = null;
+    private Coroutine _currentJumpResetRoutine = null;
 
     //Wall and Climbing Variables
     private bool _onWall;
+    private bool _stopClimbing;
     private ControllerColliderHit _wall;
-    Coroutine _climbRoutine = null;
+    private ControllerColliderHit _climbableWall;
+    private Coroutine _cameraResetRoutine;
+    private Coroutine _climbRoutine = null;
 
     //Miscellanious Variables
-    public bool CanSideflip;
-    [SerializeField]private float _dashCdTimer;
-    float _rotationFactorPerFrame = 15.0f;
-    private Vector3 _wallJumpForce;
-    private float _flipCdTimer;
-   
-    [SerializeField]private bool _isCrouching;
-    [SerializeField] private bool _isGroundPounding;
-    private RaycastHit _hit;
-    private Vector3 _hurtDirection;
-    private bool _isHurt;
-    private float _bounceAmount;
-    private bool _isBounce;
-    Coroutine _flickerRoutine = null;
-    Coroutine _invunerableRoutine = null;
-    Coroutine _coyoteRoutine = null;
-    MeshRenderer _meshRenderer;
-    private bool _invunerable;
-    string _spawnPoint;
-    bool _changingScenes;
-    Transform _checkpoint;
-
+    private float _rotationFactorPerFrame = 15.0f;
 
     //Dashing Variables
-    bool _canDash;
-    #
-
-    //Health Variables#
-    int _maxHealth = 100;
-    [SerializeField] int _health;
-    bool _isDead;
+    [SerializeField] private float _dashCdTimer;
+    [SerializeField] private bool _isDashing;
+    private bool _canDash;
 
     //State Variables
-    PlayerBaseState _currentState;
-    PlayerStateFactory _states;
+    private PlayerBaseState _currentState;
+    private PlayerStateFactory _states;
+
+    //Scene Variables
+    private bool _changingScenes;
+    private string _spawnPoint;
+    private Transform _checkpoint;
+
+    //Damage Variables
+    private bool _invunerable;
+    private Coroutine _flickerRoutine = null;
+    private Coroutine _invunerableRoutine = null;
+    private MeshRenderer _meshRenderer;
+    private Vector3 _hurtDirection;
+
+    //Miscellanious State Checks
+    private bool _isBounce;
+    private bool _isClimb;
+    private bool _isDead;
+    private bool _isGroundPounding;
+    private bool _isHurt;
 
     //Getters and Setters
-    public CharacterController CharacterController { get { return _characterController; } }
-    public string SpawnPoint { get { return _spawnPoint; } set { _spawnPoint = value; } }
-    public CinemachineCamera MainCamera { get { return _mainCamera; } set { _mainCamera = value; } }
-    public CinemachineCamera ClimbCamera { get { return _climbCamera; } set { _climbCamera = value; } }
-    public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
-    public MeshRenderer MeshRenderer { get { return _meshRenderer; } set { _meshRenderer = value; } }
-    public Coroutine CurrentJumpResetRoutine { get {  return _currentJumpResetRoutine; } set { _currentJumpResetRoutine = value; } }
-    public Coroutine FlickerRoutine { get { return _flickerRoutine; } set { _flickerRoutine = value; } }
-    public Coroutine InvunerableRoutine { get { return _invunerableRoutine; } set { _invunerableRoutine = value; } } 
-    public Coroutine CoyoteRoutine { get { return _coyoteRoutine; } set { _coyoteRoutine = value; } }
-    public Coroutine ClimbRoutine { get { return _climbRoutine; } set { _climbRoutine = value; } }
-    public Dictionary<int, float> InitialJumpVelocities { get { return _initialJumpVelocities; } }
-    public Dictionary<int, float> JumpGravities { get { return _jumpGravities; } }
-   public Transform Checkpoint { get { return _checkpoint; } set { _checkpoint = value; } }
-    public int JumpCount {  get { return _jumpCount; } set { _jumpCount = value; } }
+    public bool CanDash { get { return _canDash; } set { _canDash = value; } }
+    public bool ClimbDelay { get { return _climbDelay; } set { _climbDelay = value; } }
+    public bool FreezeMovement { get { return _freezeMovement; } set { _freezeMovement = value; } }
+    public bool Invunerable { get { return _invunerable; } set { _invunerable = value; } }
+    public bool IsBounce { get { return _isBounce; } set { _isBounce = value; } }
+    public bool IsClimb { get { return _isClimb; } set { _isClimb = value; } }
+    public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
+    public bool IsDead { get { return _isDead; } set { _isDead = value; } }
+    public bool IsGroundPounding { get { return _isGroundPounding; } set { _isGroundPounding = value; } }
+    public bool IsHurt { get { return _isHurt; } set { _isHurt = value; } }
     public bool IsJumping { set { _isJumping = value; } }
     public bool IsJumpPressed { get { return _isJumpPressed; } } 
     public bool IsMovementPressed {  get { return _isMovementPressed; } }
-    public bool IsCrouching { get {  return _isCrouching; } set { _isCrouching = value; } }
-    public bool IsGroundPounding { get { return _isGroundPounding; } set { _isGroundPounding = value; } }
-    public bool IsDashing { get { return _isDashing; } set  { _isDashing = value; } }
-    public bool IsHurt { get { return _isHurt; } set { _isHurt = value; } }
-    public bool IsBounce { get { return _isBounce; } set { _isBounce = value; } }
-    public bool IsClimb { get { return _isClimb; } set { _isClimb = value; } }
-    public bool IsDead { get { return _isDead; } set { _isDead = value; } }
+    public int JumpCount { get { return _jumpCount; } set { _jumpCount = value; } }
     public bool OnWall { get { return _onWall; } set { _onWall = value; } }
-    public bool WallJump { get { return _wallJump; } set { _wallJump = value; } }
     public bool ShouldJump { get { return _shouldJump; } set { _shouldJump = value; } }
-    public bool FreezeMovement { get { return _freezeMovement; } set { _freezeMovement = value; } }
-    public bool Invunerable { get { return _invunerable; } set { _invunerable = value; } }
-    public bool ClimbDelay { get { return _climbDelay; } set { _climbDelay = value; } }
+    public bool StopClimbing { get { return _stopClimbing; } set { _stopClimbing = value; } }
     public bool StopMoving { get { return _changingScenes; } set { _changingScenes = value; } }
-    public bool CanDash { get { return _canDash; } set { _canDash = value; } }
-    public float CurrentMovementY { get { return _movement.y; } set { _movement.y = value; } }
-    public float CurrentMovementX { get { return _movement.x; } set { _movement.x = value; } }
-    public float CurrentMovementZ { get { return _movement.z; } set { _movement.z = value; } }
+    public bool WallJump { get { return _wallJump; } set { _wallJump = value; } }
     public float AppliedMovementY { get { return _appliedMovement.y; } set { _appliedMovement.y = value; } }
     public float AppliedMovementX { get { return _appliedMovement.x; } set { _appliedMovement.x = value; } }
     public float AppliedMovementZ { get { return _appliedMovement.z; } set { _appliedMovement.z = value; } }
-    public float Gravity { get { return _gravity; } }
-    public float WalkSpeed { get { return walkSpeed; } }
-    public float JumpBufferTimer { get { return _jumpBufferTimer; } set { _jumpBufferTimer = value; } } 
-    public float DashCdTimer { get { return _dashCdTimer; } set { _dashCdTimer = value; } }
-    public float DashCd { get { return dashCd; } }
-    public float DashForce { get { return dashForce; } }
-    public float DashUpwardForce {  get { return dashUpwardForce; } }
-    public float DashDuration { get { return dashDuration; } }
-    public float MaxJumpTime { get { return _maxJumpTime; } }
     public float BounceAmount { get { return _bounceAmount; } set { _bounceAmount = value; } }
-    public int MaxHealth { get { return _maxHealth; } set { _maxHealth = value; } }
-    public int Health { get { return _health; } set { _health = value; } }
-    public Vector3 MovementVelocity { get { return _movementVelocity; } set { _movementVelocity = value; } }
+    public float CurrentMovementY { get { return _movement.y; } set { _movement.y = value; } }
+    public float CurrentMovementX { get { return _movement.x; } set { _movement.x = value; } }
+    public float CurrentMovementZ { get { return _movement.z; } set { _movement.z = value; } }
+    public float DashCd { get { return _dashCd; } }
+    public float DashCdTimer { get { return _dashCdTimer; } set { _dashCdTimer = value; } }
+    public float DashDuration { get { return _dashDuration; } }
+    public float DashForce { get { return _dashForce; } }
+    public float DashUpwardForce { get { return _dashUpwardForce; } }
+    public float Gravity { get { return _gravity; } }
+    public float JumpBufferTimer { get { return _jumpBufferTimer; } set { _jumpBufferTimer = value; } }
+    public float MaxJumpTime { get { return _maxJumpTime; } }
+    public float WalkSpeed { get { return _walkSpeed; } }
+    public string SpawnPoint { get { return _spawnPoint; } set { _spawnPoint = value; } }
+    public CharacterController CharacterController { get { return _characterController; } }
+    public CinemachineCamera ClimbCamera { get { return _climbCamera; } set { _climbCamera = value; } }
+    public CinemachineCamera MainCamera { get { return _mainCamera; } set { _mainCamera = value; } }
+    public ControllerColliderHit Wall { get { return _wall; } }
+    public Coroutine CameraResetRoutine {  get { return _cameraResetRoutine; } set { _cameraResetRoutine = value; } }
+    public Coroutine ClimbRoutine { get { return _climbRoutine; } set { _climbRoutine = value; } }
+    public Coroutine CoyoteRoutine { get { return _coyoteRoutine; } set { _coyoteRoutine = value; } }
+    public Coroutine CurrentJumpResetRoutine { get { return _currentJumpResetRoutine; } set { _currentJumpResetRoutine = value; } }
+    public Coroutine FlickerRoutine { get { return _flickerRoutine; } set { _flickerRoutine = value; } }
+    public Coroutine InvunerableRoutine { get { return _invunerableRoutine; } set { _invunerableRoutine = value; } }
+    public Dictionary<int, float> InitialJumpVelocities { get { return _initialJumpVelocities; } }
+    public Dictionary<int, float> JumpGravities { get { return _jumpGravities; } }
+    public MeshRenderer MeshRenderer { get { return _meshRenderer; } set { _meshRenderer = value; } }
+    public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
+    public Transform Checkpoint { get { return _checkpoint; } set { _checkpoint = value; } }
     public Vector3 AppliedMovement { get { return _cameraRelativeMovement; } set { _cameraRelativeMovement = value; } }
     public Vector3 HurtDirection { get { return _hurtDirection; } set { _hurtDirection = value; } }
+    public Vector3 MovementVelocity { get { return _movementVelocity; } set { _movementVelocity = value; } }
+    public Vector3 Velocity { get { return _characterController.velocity; } }
     public Vector2 MovementInput { get { return _movementInput; } }
-    public ControllerColliderHit Wall { get { return _wall; } }
-    public RaycastHit Hit { get { return _hit; } set { _hit = value; } }
+
 
     private void Awake()
     {
+        _climbCamera.enabled = false;
         _meshRenderer = GetComponent<MeshRenderer>();
-        _currentSpeed = walkSpeed;
+        _currentSpeed = _walkSpeed;
 
         _states = new PlayerStateFactory(this);
 
         _currentState = _states.Grounded();
         _currentState.EnterState();
-
-        _health = _maxHealth;
 
         SetupJumpVariables();
     }
@@ -210,7 +205,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext obj)
     {
-        
         _isJumpPressed = obj.ReadValueAsButton();
         if (obj.started)
         {
@@ -224,7 +218,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void OnCrouch(InputAction.CallbackContext obj)
     {
-        _isCrouching = obj.ReadValueAsButton();
         if (!_characterController.isGrounded)
         {
             _isGroundPounding = true;
@@ -237,7 +230,6 @@ public class PlayerStateMachine : MonoBehaviour
         {
             IsDashing = true;
         }
-      
     }
 
     public void OnHurt(Vector3 hurtDirection, int damage)
@@ -245,7 +237,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (!_invunerable)
         {
             _hurtDirection = hurtDirection;
-            _health -= damage;
+            GameManager.Instance.Health -= damage;
             _isHurt = true;
         }
     }
@@ -254,19 +246,6 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _bounceAmount = bounceAmount;
         _isBounce = true;
-    }
-
-    public void OnDeath()
-    {
-        Debug.Log($"player died at {_characterController.transform.position} and is respawning");
-        _isDead = false;
-        _characterController.enabled = false;
-        _characterController.transform.position = _checkpoint.position;
-        Debug.Log($"player respawned at {_characterController.transform.position}");
-       
-        _characterController.enabled = true;
-        _health = _maxHealth;
-        Debug.Log($"player is at {_characterController.transform.position}");
     }
 
     public void ResetDash()
@@ -278,33 +257,41 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleRotation()
     {
-        Vector3 positionToLookAt;
-
-        positionToLookAt.x = _cameraRelativeMovement.x;
-        positionToLookAt.y = 0;
-        positionToLookAt.z = _cameraRelativeMovement.z;
-
-        Quaternion currentRotation = transform.rotation;
-
-        if (_onWall)
+        if (!_isDashing)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(_wall.normal);
+            Vector3 positionToLookAt;
 
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
-        }
+            positionToLookAt.x = _cameraRelativeMovement.x;
+            positionToLookAt.y = 0;
+            positionToLookAt.z = _cameraRelativeMovement.z;
 
-        else if (_isClimb)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(-_hit.normal);
+            Quaternion currentRotation = transform.rotation;
 
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
-        }
+            if (_onWall)
+            {
+                Vector3 wallRotation = new Vector3(_wall.normal.x, 0, _wall.normal.z);
 
-        else if (_isMovementPressed)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+                Quaternion targetRotation = Quaternion.LookRotation(wallRotation);
 
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
+                Debug.Log("Test for wall jump rotation");
+            }
+
+            else if (_isClimb)
+            {
+                Vector3 climbRotation = new Vector3(_climbableWall.normal.x, 0, _climbableWall.normal.z);
+
+                Quaternion targetRotation = Quaternion.LookRotation(-climbRotation);
+
+                transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
+            }
+
+            else if (_isMovementPressed)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+
+                transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, _rotationFactorPerFrame * Time.deltaTime);
+            }
         }
     }
     private void HandleTimers()
@@ -348,6 +335,18 @@ public class PlayerStateMachine : MonoBehaviour
             _onWall = true;
         }
 
+        if (hit.gameObject.tag == "Climbable" && hit.normal.y < 0.1f && !_stopClimbing)
+        {
+            _climbableWall = hit;
+            _isClimb = true;
+        }
+
+        if (_stopClimbing || hit.gameObject.tag == "Climbable" && hit.normal.y > 0.1f || hit.gameObject.tag != "Climbable" && !CharacterController.isGrounded)
+        {
+            _isClimb = false;
+           
+        }
+
         if (hit.normal.y > 0.8f && !_isHurt)
         {
             IStompable stomped = hit.gameObject.GetComponent<IStompable>();
@@ -362,7 +361,8 @@ public class PlayerStateMachine : MonoBehaviour
 
             if (hit.gameObject.tag == "Spring")
             {
-                OnBounce(30f);
+                Spring spring = hit.gameObject.GetComponent<Spring>();
+                OnBounce(spring.Bounciness.BounceAmount);
             }
 
             if (IsGroundPounding && hit.gameObject.tag == "Cracked")
@@ -379,12 +379,6 @@ public class PlayerStateMachine : MonoBehaviour
     }
     private void Update()
     {
-        //if (_health <= 0)
-        //{
-        //    _isDead = true;
-        //    OnDeath();
-        //}
-
         HandleRotation();
         _currentState.UpdateStates();
 

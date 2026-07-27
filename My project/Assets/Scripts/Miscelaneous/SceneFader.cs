@@ -12,9 +12,9 @@ public class SceneFader : MonoBehaviour
     [SerializeField] string _spawnerTag;
     [SerializeField] Transform _spawner;
 
-    public Transform Spawner {  get { return _spawner; } }
     public string DestinationSpawner { get { return _nextSceneSpawnerTag; } }
     public string ThisTag { get { return _spawnerTag; } }
+    public Transform Spawner { get { return _spawner; } }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,7 +25,6 @@ public class SceneFader : MonoBehaviour
             SceneSwapManager.Instance.LoadFromTransition = true;
             SceneSwapManager.Instance.PlayersSpawn = _nextSceneSpawnerTag;
             SceneSwapManager.Instance.FadeAndLoad(_nextScene, 3);
-            
         }
     }
 

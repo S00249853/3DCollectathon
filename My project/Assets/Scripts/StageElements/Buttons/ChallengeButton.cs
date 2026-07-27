@@ -21,18 +21,34 @@ public class ChallengeButton : MonoBehaviour, IStompable
         mesh.enabled = true;
         foreach (GameObject challenge in _challenge)
         {
-            challenge.SetActive(false);
+            if (challenge.activeSelf == true )
+            {
+                challenge.SetActive(false);
+            }
+            else if (challenge.activeSelf == false)
+            {
+                challenge.SetActive(true);
+            }
+
         }
     }
     public void Stomped()
     {
+       
         _onTimer = _on;
         _activated = true;
         collider.enabled = false;
         mesh.enabled = false;
         foreach (GameObject challenge in _challenge)
         {
-            challenge.SetActive(true);
+            if (challenge.activeSelf == true)
+            {
+                challenge.SetActive(false);
+            }
+            else if (challenge.activeSelf == false)
+            {
+                challenge.SetActive(true);
+            }
         }
     }
 
@@ -40,12 +56,13 @@ public class ChallengeButton : MonoBehaviour, IStompable
     {
         if ( _onTimer > 0)
         {
-            _onTimer -= Time.deltaTime;
+            GameManager.Instance.ChallengeTimer.text = Mathf.Floor(_onTimer).ToString();
+           _onTimer -= Time.deltaTime;
         }
         if (_activated && _onTimer <= 0)
         {
+            GameManager.Instance.ChallengeTimer.text = "";
             _activated = false;
-            _onTimer = _on;
             ResetChallenge();
         }
     }

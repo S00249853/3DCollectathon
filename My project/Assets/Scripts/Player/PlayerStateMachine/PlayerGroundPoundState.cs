@@ -4,11 +4,11 @@ public class PlayerGroundPoundState : PlayerBaseState
 {
     private float _delay = 0.25f;
     private float _delayTimer;
+
     public PlayerGroundPoundState(PlayerStateMachine ctx, PlayerStateFactory factory) : base(ctx, factory)
     {
         IsRootState = true;
     }
-
     public override void CheckSwitchState()
     {
         if (Ctx.CharacterController.isGrounded || Ctx.IsDead)
@@ -59,6 +59,5 @@ public class PlayerGroundPoundState : PlayerBaseState
             Ctx.AppliedMovementZ = 0;
         }
         CheckSwitchState();
-
     }
 }

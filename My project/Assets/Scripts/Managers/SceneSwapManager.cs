@@ -32,7 +32,9 @@ public class SceneSwapManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene,LoadSceneMode mode)
     {
+        
         _player = GameObject.FindGameObjectWithTag("Player");
+        GameManager.Instance.Checkpoint = _player.transform;
         Debug.Log($"Player is {_player.name} and player is at {_player.transform.position}");
         if (LoadFromTransition)
         {

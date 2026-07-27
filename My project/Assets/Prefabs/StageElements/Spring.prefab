@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4373098521447937046}
   - component: {fileID: 8665152018572413692}
   - component: {fileID: 7612748919628555240}
+  - component: {fileID: 649437045476326424}
   m_Layer: 0
   m_Name: Spring
   m_TagString: Spring
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.659, y: -1.046, z: 11.89}
-  m_LocalScale: {x: 2, y: 0.17928757, z: 2}
+  m_LocalScale: {x: 2, y: 0.17928752, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,3 +115,16 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &649437045476326424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7844963271269136559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6b611fc90c4294eb8af77bfe1ea612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spring
+  Bounciness: {fileID: 11400000, guid: e783a2f1cb8b07c4498e39f58f4748bf, type: 2}

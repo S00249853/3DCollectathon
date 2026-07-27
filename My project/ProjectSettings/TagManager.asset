@@ -18,6 +18,8 @@ TagManager:
   - Teleporter
   - Checkpoint
   - Boundary
+  - ClimbStop
+  - DashOrb
   layers:
   - Default
   - TransparentFX

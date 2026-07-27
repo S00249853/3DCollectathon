@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    [SerializeField] Transform[] _waypoints;
+
+    //Variables
+    float _elapsedTime;
+    float _timeToWaypoint;
+    int _index;
     CharacterController _player;
     Transform _previousWaypoint;
     Transform _targetWaypoint;
-    int _index;
+    Vector3 _platformMovement;
+
+    //Editable Variables
+    [SerializeField] Rigidbody rb;
+    [SerializeField] Transform[] _waypoints;
     [SerializeField] float _speed;
-    float _elapsedTime;
-    float _timeToWaypoint;
 
     private void Start()
     {
@@ -17,19 +23,18 @@ public class MovingPlatform : MonoBehaviour
         GetWaypoint();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _elapsedTime += Time.deltaTime;
-
         float elapsedPercentage = _elapsedTime / _timeToWaypoint;
-         elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
-        transform.position = Vector3.Lerp(_previousWaypoint.position, _targetWaypoint.position, elapsedPercentage);
+        _platformMovement = Vector3.Lerp(_previousWaypoint.position, _targetWaypoint.position, elapsedPercentage);
+        
+        rb.MovePosition( _platformMovement );
 
         if (elapsedPercentage >= 1)
         {
             GetWaypoint();
-        }
-        
+        }  
     }
 
     private void GetWaypoint()
@@ -50,25 +55,26 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
         if (other.gameObject.tag == "Player")
         {
             _player = other.gameObject.GetComponent<CharacterController>();
             Debug.Log("Platform Entered");
-            Debug.Log($"Parent is {other.gameObject.transform.parent}");
-            _player.transform.SetParent(transform);
-            Debug.Log($"Parent now is {other.gameObject.transform.parent}");
         }
-        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            _player.Move((rb.linearVelocity * .5f) * Time.deltaTime);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-     
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Platform Exited");
-            other.gameObject.transform.parent = null;
+            _player = null;
         }
     }
 }

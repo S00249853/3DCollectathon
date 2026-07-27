@@ -32,8 +32,6 @@ IsRootState = true;
 
     public override void UpdateState()
     {
-        //Ctx.CurrentMovementY = 0;
-        //Ctx.AppliedMovementY = 0;
         CheckSwitchState();
     }
 }

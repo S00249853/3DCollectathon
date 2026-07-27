@@ -8,6 +8,14 @@ public class PlayerClimbState : PlayerBaseState
         yield return new WaitForSeconds(.2f);
         Ctx.ClimbDelay = true;
     }
+
+    IEnumerator CameraReset()
+    {
+        Ctx.ClimbCamera.enabled = false;
+        Ctx.StopMoving = true;
+        yield return new WaitForSeconds(.2f);
+        Ctx.StopMoving = false;
+    }
     public PlayerClimbState(PlayerStateMachine ctx, PlayerStateFactory factory) : base(ctx, factory)
     {
         IsRootState = true;
@@ -15,7 +23,7 @@ public class PlayerClimbState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (!Ctx.IsClimb && Ctx.CharacterController.isGrounded || Ctx.IsDead)
+        if (Ctx.IsClimb && Ctx.CharacterController.isGrounded || !Ctx.IsClimb && Ctx.CharacterController.isGrounded || Ctx.IsDead)
         {
             SwitchState(Factory.Grounded());
         }
@@ -35,15 +43,18 @@ public class PlayerClimbState : PlayerBaseState
 
     public override void EnterState()
     {
-       InitializeSubState();
-        Ctx.MainCamera.enabled = false;
+        Debug.Log("Eing Climb State");
+        InitializeSubState();
+        Ctx.ClimbCamera.enabled = true;
         Ctx.ClimbRoutine = Ctx.StartCoroutine(ClimbDelay());
         // May need to change how thw player camera works here
     }
 
     public override void ExitState()
     {
-        Ctx.MainCamera.enabled = true;
+        Debug.Log("Exiting Climb State");
+        Ctx.IsClimb = false;
+        Ctx.CameraResetRoutine = Ctx.StartCoroutine(CameraReset());
         if (Ctx.ClimbRoutine != null)
         {
             Ctx.StopCoroutine(Ctx.ClimbRoutine);
@@ -58,6 +69,10 @@ public class PlayerClimbState : PlayerBaseState
 
     public override void UpdateState()
     {
+       if (Ctx.CharacterController.collisionFlags == 0)
+        {
+            Ctx.IsClimb = false;
+        }
         CheckSwitchState();
     }
 }
