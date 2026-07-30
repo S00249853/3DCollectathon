@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 296
     height: 682
-  m_MinSize: {x: 201, y: 226}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -690,7 +690,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/StageElements
+    - Assets/Prefabs/Collectables
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -700,26 +700,24 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/StageElements
+  - Assets/Prefabs/Collectables
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Dtpol\source\repos\3DCollectathon\My project
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 39}
+    scrollPos: {x: 0, y: 95}
     m_SelectedIDs:
-    - m_Data: 50000
+    - m_Data: 67344
     m_LastClickedID:
-      m_Data: 50000
+      m_Data: 67344
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 49840
-    - m_Data: 49842
-    - m_Data: 49844
-    - m_Data: 49846
-    - m_Data: 49848
-    - m_Data: 50000
+    - m_Data: 67272
+    - m_Data: 67280
+    - m_Data: 67286
+    - m_Data: 71194
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -752,13 +750,7 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs:
-    - m_Data: 0
-    - m_Data: 49840
-    - m_Data: 49842
-    - m_Data: 49844
-    - m_Data: 49846
-    - m_Data: 49848
+    m_ExpandedIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -786,8 +778,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: -139608
-    m_LastClickedInstanceID: -139608
+    - m_Data: 70796
+    m_LastClickedInstanceID: 70796
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -864,7 +856,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 290
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -910,19 +902,20 @@ MonoBehaviour:
     m_DynamicPanelBehavior: 0
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 2133}
+      scrollPos: {x: 0, y: 272}
       m_SelectedIDs:
-      - m_Data: -139608
+      - m_Data: 70796
       m_LastClickedID:
-        m_Data: -139608
+        m_Data: 70796
       m_ExpandedIDs:
-      - m_Data: -58302
-      - m_Data: -54998
-      - m_Data: -5234
-      - m_Data: -2936
-      - m_Data: -1300
-      - m_Data: 50250
-      - m_Data: 50852
+      - m_Data: -89408
+      - m_Data: -88600
+      - m_Data: -87740
+      - m_Data: -87448
+      - m_Data: -84394
+      - m_Data: -83010
+      - m_Data: -54472
+      - m_Data: -52670
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1571,9 +1564,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -907.2499, y: 601.1836, z: 576.5232}
+    m_Target: {x: 90.05932, y: -4.460758, z: -26.409054}
     speed: 2
-    m_Value: {x: -907.2499, y: 601.1836, z: 576.5232}
+    m_Value: {x: 90.05932, y: -4.460758, z: -26.409054}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1619,13 +1612,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.2096634, y: 0.5305678, z: 0.13705021, w: -0.8097128}
+    m_Target: {x: -0.18821795, y: 0.49758118, z: -0.11191423, w: -0.83912027}
     speed: 2
-    m_Value: {x: 0.21089064, y: 0.5303939, z: 0.13785413, w: -0.8094465}
+    m_Value: {x: -0.18808179, y: 0.498924, z: -0.112215474, w: -0.8385152}
   m_Size:
-    m_Target: 615.2106
+    m_Target: 1.2247487
     speed: 2
-    m_Value: 615.2106
+    m_Value: 1.2247487
   m_Ortho:
     m_Target: 0
     speed: 2

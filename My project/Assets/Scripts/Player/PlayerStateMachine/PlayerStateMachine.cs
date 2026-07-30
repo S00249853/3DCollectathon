@@ -329,7 +329,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (!_characterController.isGrounded && hit.normal.y < 0.1f && !_isDashing && hit.gameObject.tag != "NonStick" && hit.gameObject.tag != "NonStick" && hit.gameObject.tag != "Climbable")
+        if (!_characterController.isGrounded && hit.normal.y < 0.1f && !_isDashing && CharacterController.collisionFlags == CollisionFlags.Sides && hit.gameObject.tag != "NonStick" && hit.gameObject.tag != "NonStick" && hit.gameObject.tag != "Climbable")
         {
             _wall = hit;
             _onWall = true;
