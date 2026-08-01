@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 376
     height: 933
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 296
     height: 682
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -690,7 +690,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Collectables
+    - Assets/Scripts/Player/PlayerStateMachine
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -700,24 +700,24 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Collectables
+  - Assets/Scripts/Player/PlayerStateMachine
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Dtpol\source\repos\3DCollectathon\My project
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 95}
+    scrollPos: {x: 0, y: 263}
     m_SelectedIDs:
-    - m_Data: 67344
+    - m_Data: 52328
     m_LastClickedID:
-      m_Data: 67344
+      m_Data: 52328
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 67272
-    - m_Data: 67280
-    - m_Data: 67286
-    - m_Data: 71194
+    - m_Data: 49844
+    - m_Data: 49846
+    - m_Data: 49848
+    - m_Data: 50022
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -750,7 +750,11 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs: []
+    m_ExpandedIDs:
+    - m_Data: 0
+    - m_Data: 49844
+    - m_Data: 49846
+    - m_Data: 49848
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -778,8 +782,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 70796
-    m_LastClickedInstanceID: 70796
+    - m_Data: -4406
+    m_LastClickedInstanceID: -4406
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -902,20 +906,14 @@ MonoBehaviour:
     m_DynamicPanelBehavior: 0
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 272}
+      scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: 70796
+      - m_Data: -4406
       m_LastClickedID:
-        m_Data: 70796
+        m_Data: -4406
       m_ExpandedIDs:
-      - m_Data: -89408
-      - m_Data: -88600
-      - m_Data: -87740
-      - m_Data: -87448
-      - m_Data: -84394
-      - m_Data: -83010
-      - m_Data: -54472
-      - m_Data: -52670
+      - m_Data: -2866
+      - m_Data: -1300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1564,9 +1562,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 90.05932, y: -4.460758, z: -26.409054}
+    m_Target: {x: 200.40846, y: 94.23331, z: -132.43642}
     speed: 2
-    m_Value: {x: 90.05932, y: -4.460758, z: -26.409054}
+    m_Value: {x: 200.40846, y: 94.23331, z: -132.43642}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1612,9 +1610,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.18821795, y: 0.49758118, z: -0.11191423, w: -0.83912027}
+    m_Target: {x: -0.26379338, y: 0.30891696, z: -0.08915504, w: -0.90894955}
     speed: 2
-    m_Value: {x: -0.18808179, y: 0.498924, z: -0.112215474, w: -0.8385152}
+    m_Value: {x: -0.2652689, y: 0.30891368, z: -0.08965552, w: -0.90893704}
   m_Size:
     m_Target: 1.2247487
     speed: 2

@@ -70,8 +70,9 @@ public class PlayerFallState : PlayerBaseState
 
     void HandleGravity()
     {
+        float fallMultiplier = 2.0f;
         float previousYVelocity = Ctx.CurrentMovementY;
-        Ctx.CurrentMovementY = Ctx.CurrentMovementY + Ctx.Gravity *Time.deltaTime;
+        Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.JumpGravities[Ctx.JumpCount] * fallMultiplier * Time.deltaTime);
         Ctx.AppliedMovementY = Mathf.Max((previousYVelocity + Ctx.CurrentMovementY) * .5f, -20.0f);
     }
 }
