@@ -75,8 +75,8 @@ public class PlayerWallJumpState : PlayerBaseState
     {
        Vector3 wallJumpForce = Ctx.Wall.normal * Ctx.WalkSpeed;
 
-        Ctx.CurrentMovementY = Ctx.InitialJumpVelocities[1] / 1.1f;
-        Ctx.AppliedMovementY = Ctx.InitialJumpVelocities[1] / 1.1f;
+        Ctx.CurrentMovementY = Ctx.InitialJumpVelocities[1] / .9f;
+        Ctx.AppliedMovementY = Ctx.InitialJumpVelocities[1] / .9f;
      
         Ctx.MovementVelocity = wallJumpForce;
     }

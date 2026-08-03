@@ -4,6 +4,8 @@ public class MovingPlatform : MonoBehaviour
 {
 
     //Variables
+    float _delay = 1f;
+    float _delayCd;
     float _elapsedTime;
     float _timeToWaypoint;
     int _index;
@@ -25,16 +27,29 @@ public class MovingPlatform : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _elapsedTime += Time.deltaTime;
-        float elapsedPercentage = _elapsedTime / _timeToWaypoint;
-        _platformMovement = Vector3.Lerp(_previousWaypoint.position, _targetWaypoint.position, elapsedPercentage);
-        
-        rb.MovePosition( _platformMovement );
-
-        if (elapsedPercentage >= 1)
+        if (_delayCd < 0)
         {
-            GetWaypoint();
-        }  
+            _elapsedTime += Time.deltaTime;
+            float elapsedPercentage = _elapsedTime / _timeToWaypoint;
+            _platformMovement = Vector3.Lerp(_previousWaypoint.position, _targetWaypoint.position, elapsedPercentage);
+
+            rb.MovePosition(_platformMovement);
+
+
+            if (elapsedPercentage >= 1)
+            {
+                GetWaypoint();
+                _delayCd = _delay;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (_delayCd >= 0)
+        {
+            _delayCd -= Time.deltaTime;
+        }
     }
 
     private void GetWaypoint()
