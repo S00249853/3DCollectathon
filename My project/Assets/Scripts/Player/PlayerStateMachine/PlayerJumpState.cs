@@ -5,7 +5,7 @@ public class PlayerJumpState : PlayerBaseState
 {
     IEnumerator JumpResetRoutine()
     {
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.1f);
         Ctx.JumpCount = 0;
     }
     public PlayerJumpState(PlayerStateMachine ctx, PlayerStateFactory factory) : base(ctx, factory)

@@ -12,7 +12,7 @@ public class SwitchingPlatforms : MonoBehaviour
         foreach (GameObject go in LeftPlatforms)
         {
             Renderer renderer = go.GetComponent<Renderer>();
-            BoxCollider collider = go.GetComponent<BoxCollider>();
+            Collider collider = go.GetComponent<Collider>();
             renderer.enabled = false;
             collider.enabled = false;
             PlatformsCdTimer = PlatformsCd;
@@ -30,7 +30,7 @@ public class SwitchingPlatforms : MonoBehaviour
             foreach (GameObject go in RightPlatforms)
             {
                 Renderer renderer = go.GetComponent<Renderer>();
-                BoxCollider collider = go.GetComponent<BoxCollider>();
+                Collider collider = go.GetComponent<Collider>();
                 renderer.enabled = !renderer.enabled;
                 collider.enabled = !collider.enabled;
             }
@@ -38,7 +38,7 @@ public class SwitchingPlatforms : MonoBehaviour
             foreach (GameObject go in LeftPlatforms)
             {
                 Renderer renderer = go.GetComponent<Renderer>();
-                BoxCollider collider = go.GetComponent<BoxCollider>();
+                Collider collider = go.GetComponent<Collider>();
                 renderer.enabled = !renderer.enabled;
                 collider.enabled = !collider.enabled;
             }

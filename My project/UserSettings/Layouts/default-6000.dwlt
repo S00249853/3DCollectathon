@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 376
     height: 933
-  m_MinSize: {x: 276, y: 76}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -95,8 +95,8 @@ MonoBehaviour:
     y: 0
     width: 296
     height: 682
-  m_MinSize: {x: 201, y: 226}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -690,7 +690,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Player/PlayerStateMachine
+    - Assets/Prefabs/StageElements
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -700,24 +700,25 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Player/PlayerStateMachine
+  - Assets/Prefabs/StageElements
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Dtpol\source\repos\3DCollectathon\My project
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 263}
+    scrollPos: {x: 0, y: 87}
     m_SelectedIDs:
-    - m_Data: 52328
+    - m_Data: 54304
     m_LastClickedID:
-      m_Data: 52328
+      m_Data: 54304
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 49844
-    - m_Data: 49846
-    - m_Data: 49848
-    - m_Data: 50022
+    - m_Data: 49986
+    - m_Data: 49990
+    - m_Data: 49992
+    - m_Data: 50084
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -753,8 +754,6 @@ MonoBehaviour:
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 49844
-    - m_Data: 49846
-    - m_Data: 49848
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -782,8 +781,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: -4406
-    m_LastClickedInstanceID: -4406
+    - m_Data: -67222
+    m_LastClickedInstanceID: -67222
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -908,11 +907,14 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: -4406
+      - m_Data: -67222
       m_LastClickedID:
-        m_Data: -4406
+        m_Data: -67222
       m_ExpandedIDs:
-      - m_Data: -2866
+      - m_Data: -149790
+      - m_Data: -68340
+      - m_Data: -64664
+      - m_Data: -2906
       - m_Data: -1300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1562,9 +1564,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 200.40846, y: 94.23331, z: -132.43642}
+    m_Target: {x: 171.69727, y: 114.09412, z: -133.1298}
     speed: 2
-    m_Value: {x: 200.40846, y: 94.23331, z: -132.43642}
+    m_Value: {x: 171.69727, y: 114.09412, z: -133.1298}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1610,13 +1612,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.26379338, y: 0.30891696, z: -0.08915504, w: -0.90894955}
+    m_Target: {x: -0.30677494, y: 0.6629455, z: -0.34269086, w: -0.58980113}
     speed: 2
-    m_Value: {x: -0.2652689, y: 0.30891368, z: -0.08965552, w: -0.90893704}
+    m_Value: {x: -0.30694228, y: 0.66330713, z: -0.34287778, w: -0.5901228}
   m_Size:
-    m_Target: 1.2247487
+    m_Target: 36.366802
     speed: 2
-    m_Value: 1.2247487
+    m_Value: 36.366802
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1775,9 +1777,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 759
+    y: 761
     width: 1543
-    height: 227
+    height: 225
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0

@@ -49,11 +49,13 @@ public class PlayerWallJumpState : PlayerBaseState
         HandleWallJump();
         Ctx.CanDash = true;
         Ctx.WallJump = false;
+        Ctx.WallJumpBuffer = true;
         Ctx.FreezeMovement = true;
     }
 
     public override void ExitState()
     {
+        Ctx.WallJumpBuffer = false;
         Ctx.FreezeMovement = false;
         Ctx.MovementVelocity = Vector3.zero;
     }
@@ -85,6 +87,7 @@ public class PlayerWallJumpState : PlayerBaseState
 
         if (isFalling)
         {
+            Ctx.WallJumpBuffer = false;
             Ctx.FreezeMovement = false;
             Ctx.MovementVelocity = Vector3.zero;
             float previousYVelocity = Ctx.CurrentMovementY;

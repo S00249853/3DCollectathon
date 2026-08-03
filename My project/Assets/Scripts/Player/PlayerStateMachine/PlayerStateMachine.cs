@@ -45,6 +45,7 @@ public class PlayerStateMachine : MonoBehaviour
     private bool _isJumpPressed;
     private bool _shouldJump;
     private bool _wallJump;
+    private bool _wallJumpBuffer;
     private float _bounceAmount;
     private float _initialJumpVelocity;
     private float _jumpBufferTimer;
@@ -115,6 +116,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool StopClimbing { get { return _stopClimbing; } set { _stopClimbing = value; } }
     public bool StopMoving { get { return _changingScenes; } set { _changingScenes = value; } }
     public bool WallJump { get { return _wallJump; } set { _wallJump = value; } }
+    public bool WallJumpBuffer { get { return _wallJumpBuffer; } set { _wallJumpBuffer = value; } }
     public float AppliedMovementY { get { return _appliedMovement.y; } set { _appliedMovement.y = value; } }
     public float AppliedMovementX { get { return _appliedMovement.x; } set { _appliedMovement.x = value; } }
     public float AppliedMovementZ { get { return _appliedMovement.z; } set { _appliedMovement.z = value; } }
@@ -268,6 +270,16 @@ public class PlayerStateMachine : MonoBehaviour
             Quaternion currentRotation = transform.rotation;
 
             if (_onWall)
+            {
+                Vector3 wallRotation = new Vector3(_wall.normal.x, 0, _wall.normal.z);
+
+                Quaternion targetRotation = Quaternion.LookRotation(wallRotation);
+
+                transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
+                Debug.Log("Test for wall jump rotation");
+            }
+
+            else if (_wallJumpBuffer)
             {
                 Vector3 wallRotation = new Vector3(_wall.normal.x, 0, _wall.normal.z);
 
