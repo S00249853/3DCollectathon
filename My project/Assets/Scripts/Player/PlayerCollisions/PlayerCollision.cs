@@ -17,7 +17,7 @@ public class PlayerCollision : MonoBehaviour
         {
             Debug.Log("Cannonball Hit");
             Vector3 hitDirection = collision.gameObject.transform.forward;
-            if (hitDirection.y <= 0.8)
+            if (_cc.collisionFlags != CollisionFlags.Below)
             {
                 hitDirection = hitDirection.normalized;
                 _player.OnHurt(hitDirection, 10);
