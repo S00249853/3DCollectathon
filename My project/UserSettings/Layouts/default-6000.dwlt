@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 376
     height: 933
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -690,7 +690,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/StageElements
+    - Assets/Prefabs/StageElements/Buttons
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -700,23 +700,23 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/StageElements
+  - Assets/Prefabs/StageElements/Buttons
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Dtpol\source\repos\3DCollectathon\My project
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 182}
+    scrollPos: {x: 0, y: 79}
     m_SelectedIDs:
-    - m_Data: 67348
+    - m_Data: 84756
     m_LastClickedID:
-      m_Data: 67348
+      m_Data: 84756
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 67276
-    - m_Data: 67284
-    - m_Data: 67348
+    - m_Data: 49844
+    - m_Data: 49988
+    - m_Data: 84724
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -749,7 +749,9 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs: []
+    m_ExpandedIDs:
+    - m_Data: 0
+    - m_Data: 49844
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -776,9 +778,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs:
-    - m_Data: -298706
-    m_LastClickedInstanceID: -298706
+    m_SelectedInstanceIDs: []
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -855,7 +856,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 121
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -901,24 +902,16 @@ MonoBehaviour:
     m_DynamicPanelBehavior: 0
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 5102}
-      m_SelectedIDs:
-      - m_Data: -298706
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: []
       m_LastClickedID:
-        m_Data: -298706
+        m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -300078
-      - m_Data: -276722
-      - m_Data: -253046
-      - m_Data: -178394
-      - m_Data: -126148
-      - m_Data: -94708
-      - m_Data: -56062
-      - m_Data: -55602
-      - m_Data: -54466
-      - m_Data: -52694
-      - m_Data: 67820
-      - m_Data: 68682
+      - m_Data: -80022
+      - m_Data: -79408
+      - m_Data: -78950
+      - m_Data: -2972
+      - m_Data: -1300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1514,7 +1507,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       displayed: 1
       id: UnityEditor.ProBuilder.MenuActionSettingsOverlay
-      index: 14
+      index: 13
       contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
@@ -1567,9 +1560,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -43.548706, y: 7.024849, z: -32.24447}
+    m_Target: {x: 88.30725, y: 312.09418, z: -2.9168892}
     speed: 2
-    m_Value: {x: -43.548706, y: 7.024849, z: -32.24447}
+    m_Value: {x: 88.30725, y: 312.09418, z: -2.9168892}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1615,9 +1608,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.018124418, y: 0.9836836, z: -0.1491872, w: -0.08923951}
+    m_Target: {x: -0.34997123, y: -0.22537337, z: 0.08945409, w: -0.9038425}
     speed: 2
-    m_Value: {x: -0.018140912, y: 0.9845787, z: -0.14932296, w: -0.08932071}
+    m_Value: {x: -0.35015085, y: -0.2269325, z: 0.09005975, w: -0.9043148}
   m_Size:
     m_Target: 43.368088
     speed: 2
