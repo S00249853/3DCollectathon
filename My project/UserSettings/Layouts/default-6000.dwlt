@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 23
+  controlID: 72
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 24
+  controlID: 73
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 25
+  controlID: 74
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -707,11 +707,11 @@ MonoBehaviour:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 226}
+    scrollPos: {x: 0, y: 259}
     m_SelectedIDs:
-    - m_Data: 77802
+    - m_Data: 67346
     m_LastClickedID:
-      m_Data: 77802
+      m_Data: 67346
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 67276
@@ -777,8 +777,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: -92202
-    m_LastClickedInstanceID: -92202
+    - m_Data: -242720
+    m_LastClickedInstanceID: -242720
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -901,13 +901,15 @@ MonoBehaviour:
     m_DynamicPanelBehavior: 0
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 526}
       m_SelectedIDs:
-      - m_Data: -92202
+      - m_Data: -242720
       m_LastClickedID:
-        m_Data: -92202
+        m_Data: -242720
       m_ExpandedIDs:
-      - m_Data: -54562
+      - m_Data: -242708
+      - m_Data: -54540
+      - m_Data: -54538
       - m_Data: -52694
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1557,9 +1559,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 167.68967, y: -10.39031, z: -77.86899}
+    m_Target: {x: 178.60936, y: -13.04381, z: -290.82498}
     speed: 2
-    m_Value: {x: 167.68967, y: -10.39031, z: -77.86899}
+    m_Value: {x: 178.60936, y: -13.04381, z: -290.82498}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1605,9 +1607,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.29367623, y: -0.517933, z: 0.19559228, w: 0.77822703}
+    m_Target: {x: -0.006053339, y: -0.90438944, z: 0.006785445, w: -0.42441896}
     speed: 2
-    m_Value: {x: 0.29361838, y: -0.5195171, z: 0.19619018, w: 0.77807426}
+    m_Value: {x: -0.0060589937, y: -0.9052342, z: 0.006791783, w: -0.42481542}
   m_Size:
     m_Target: 43.368088
     speed: 2
