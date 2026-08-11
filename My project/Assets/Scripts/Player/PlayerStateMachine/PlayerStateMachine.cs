@@ -84,8 +84,10 @@ public class PlayerStateMachine : MonoBehaviour
 
     //Damage Variables
     private bool _invunerable;
+    private bool _knockbackInAffect;
     private Coroutine _flickerRoutine = null;
     private Coroutine _invunerableRoutine = null;
+    private Coroutine _knockbackRoutine = null;
     private MeshRenderer _meshRenderer;
     private Vector3 _hurtDirection;
 
@@ -110,6 +112,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsJumping { set { _isJumping = value; } }
     public bool IsJumpPressed { get { return _isJumpPressed; } } 
     public bool IsMovementPressed {  get { return _isMovementPressed; } }
+    public bool KnockbackInAffect { get { return _knockbackInAffect; } set { _knockbackInAffect = value; } }
     public int JumpCount { get { return _jumpCount; } set { _jumpCount = value; } }
     public bool OnWall { get { return _onWall; } set { _onWall = value; } }
     public bool ShouldJump { get { return _shouldJump; } set { _shouldJump = value; } }
@@ -144,6 +147,7 @@ public class PlayerStateMachine : MonoBehaviour
     public Coroutine CurrentJumpResetRoutine { get { return _currentJumpResetRoutine; } set { _currentJumpResetRoutine = value; } }
     public Coroutine FlickerRoutine { get { return _flickerRoutine; } set { _flickerRoutine = value; } }
     public Coroutine InvunerableRoutine { get { return _invunerableRoutine; } set { _invunerableRoutine = value; } }
+    public Coroutine KnockbackRoutine { get { return _knockbackRoutine; } set { _knockbackRoutine = value; } }
     public Dictionary<int, float> InitialJumpVelocities { get { return _initialJumpVelocities; } }
     public Dictionary<int, float> JumpGravities { get { return _jumpGravities; } }
     public MeshRenderer MeshRenderer { get { return _meshRenderer; } set { _meshRenderer = value; } }

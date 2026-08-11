@@ -24,6 +24,12 @@ public class PlayerKnockbackState : PlayerBaseState
         Ctx.Invunerable = false;
     }
 
+    IEnumerator KnockbackRoutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Ctx.KnockbackInAffect = false;
+    }
+
     public override void CheckSwitchState()
     {
        if (Ctx.CharacterController.isGrounded && !Ctx.IsHurt || Ctx.IsDead)
@@ -34,13 +40,19 @@ public class PlayerKnockbackState : PlayerBaseState
         {
             SwitchState(Factory.ChangeScene());
         }
+       else if (!Ctx.KnockbackInAffect)
+        {
+            SwitchState(Factory.Fall());
+        }
     }
 
     public override void EnterState()
     {
+        Ctx.KnockbackInAffect = true;
         Ctx.Invunerable = true;
         Ctx.FlickerRoutine = Ctx.StartCoroutine(FlickerRoutine());
         Ctx.InvunerableRoutine = Ctx.StartCoroutine(InvunerableRoutine());
+        Ctx.KnockbackRoutine = Ctx.StartCoroutine(KnockbackRoutine());
         InitializeSubState();
         Ctx.FreezeMovement = true;
         HandleKnockback();
@@ -48,6 +60,11 @@ public class PlayerKnockbackState : PlayerBaseState
 
     public override void ExitState()
     {
+        if (Ctx.KnockbackRoutine != null)
+        {
+            Ctx.StartCoroutine(KnockbackRoutine());
+        }
+        Ctx.KnockbackInAffect = false;
         Ctx.FreezeMovement = false;
         Ctx.MovementVelocity = Vector3.zero;
         Ctx.HurtDirection = Vector3.zero;
