@@ -6,6 +6,7 @@ public class Cannonball : MonoBehaviour
     public Vector3 Destination;
     float _timeToDestination;
     float _elapsedTime;
+    public float _speed;
 
     void Update()
     {
@@ -21,7 +22,7 @@ public class Cannonball : MonoBehaviour
     public void SetSpeed()
     {
         float distanceToWaypoint = Vector3.Distance(Start, Destination);
-        _timeToDestination = distanceToWaypoint / 6f;
+        _timeToDestination = distanceToWaypoint / _speed;
         transform.forward = Destination;
     }
 
