@@ -73,6 +73,11 @@ public class PlayerCollision : MonoBehaviour
         {
             GameManager.Instance.Health = 0;
         }
+
+        if (other.gameObject.tag == "Healer")
+        {
+            GameManager.Instance.Health = 100;
+        }
     }
 
     private void OnTriggerExit(Collider other)
