@@ -2990,7 +2990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1012410107071830640, guid: cb9185a22e055284485edb7cc6d119a9, type: 3}
       propertyPath: cannonballSpeed
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1012410107071830640, guid: cb9185a22e055284485edb7cc6d119a9, type: 3}
       propertyPath: _maxHomingDistance
