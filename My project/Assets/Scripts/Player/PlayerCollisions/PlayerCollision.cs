@@ -78,6 +78,13 @@ public class PlayerCollision : MonoBehaviour
         {
             GameManager.Instance.Health = 100;
         }
+
+        if (other.gameObject.tag == "Activator")
+        {
+            ObjectActivator activator = other.gameObject.GetComponent<ObjectActivator>();
+            activator.Unactive.SetActive(true);
+            Debug.Log("Object Activated");
+        }
     }
 
     private void OnTriggerExit(Collider other)

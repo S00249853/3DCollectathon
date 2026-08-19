@@ -21,6 +21,7 @@ TagManager:
   - ClimbStop
   - DashOrb
   - Healer
+  - Activator
   layers:
   - Default
   - TransparentFX
