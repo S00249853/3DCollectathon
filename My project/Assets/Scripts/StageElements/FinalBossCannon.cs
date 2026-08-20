@@ -19,9 +19,10 @@ public class FinalBossCannon : Cannon
 
     public Queue<GameObject> _cannonPool2;
     public Queue<GameObject> _cannonPool3;
+    Queue<GameObject> _currentPool;
 
-    public Transform _SecondPosition;
-    public Transform _ThirdPosition;
+    public Transform _secondPosition;
+    public Transform _thirdPosition;
 
     public Phase Phase;
 
@@ -39,7 +40,7 @@ public class FinalBossCannon : Cannon
             Cannonball ball = obj.GetComponent<Cannonball>();
             if (ball != null)
             {
-                ball.Start = _SecondPosition.position;
+                ball.Start = _secondPosition.position;
                 ball._speed = cannonballSpeed;
                 ball.Destination = Direction.position;
                 ball.SetSpeed();
@@ -55,7 +56,7 @@ public class FinalBossCannon : Cannon
             Cannonball ball = obj.GetComponent<Cannonball>();
             if (ball != null)
             {
-                ball.Start = _ThirdPosition.position;
+                ball.Start = _thirdPosition.position;
                 ball._speed = cannonballSpeed;
                 ball.Destination = Direction.position;
                 ball.SetSpeed();
@@ -64,41 +65,40 @@ public class FinalBossCannon : Cannon
             _cannonPool3.Enqueue(obj);
         }
 
+        _currentPool = _cannonPool;
+
         base.Start();
     }
 
-   void Launch(Queue<GameObject> queue)
+   void Launch()
     {
-        GameObject cannonball = queue.Dequeue();
+        GameObject cannonball = _currentPool.Dequeue();
         Cannonball ball = cannonball.GetComponent<Cannonball>();
         ball.Destination = _player.transform.position;
         ball.SetSpeed();
         cannonball.SetActive(false);
         cannonball.SetActive(true);
-        queue.Enqueue(cannonball);
-        Debug.Log($"Should Launch {queue.Count}");
+        _currentPool.Enqueue(cannonball);
+        Debug.Log($"Should Launch {_currentPool.Count}");
     }
 
     void Update()
     {
+        if (Phase == Phase.Two)
+        {
+            _currentPool = _cannonPool2;
+            transform.position = _secondPosition.position;
+        }
+        else if (Phase == Phase.Three)
+        {
+            _currentPool = _cannonPool3;
+            transform.position = _thirdPosition.position;
+        }
         launchTimer -= Time.deltaTime;
         if (launchTimer <= 0)
         {
             launchTimer = launchCd;
-            if (Phase == Phase.One)
-            {
-                Launch(_cannonPool);
-            }
-            else if (Phase == Phase.Two)
-            {
-                Launch(_cannonPool2);
-                transform.position = _SecondPosition.position;
-            }
-            else if (Phase == Phase.Three)
-            {
-                Launch(_cannonPool3);
-                transform.position = _ThirdPosition.position;
-            }
+            Launch();
         }
     }
 }

@@ -44,7 +44,7 @@ public class Cannon : MonoBehaviour
         Debug.Log($"Should Launch {_cannonPool.Count}");
     }
 
-            void Update()
+         void Update()
     {
             launchTimer -= Time.deltaTime;
             if (launchTimer <= 0)

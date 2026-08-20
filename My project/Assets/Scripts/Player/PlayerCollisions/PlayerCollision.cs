@@ -82,7 +82,7 @@ public class PlayerCollision : MonoBehaviour
         if (other.gameObject.tag == "Activator")
         {
             ObjectActivator activator = other.gameObject.GetComponent<ObjectActivator>();
-            activator.Unactive.SetActive(true);
+            activator.Activate();
             Debug.Log("Object Activated");
         }
     }
