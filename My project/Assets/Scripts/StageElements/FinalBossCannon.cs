@@ -20,6 +20,9 @@ public class FinalBossCannon : Cannon
     public Queue<GameObject> _cannonPool2;
     public Queue<GameObject> _cannonPool3;
 
+    public Transform _SecondPosition;
+    public Transform _ThirdPosition;
+
     public Phase Phase;
 
     [SerializeField] float _cannonballSpeed2;
@@ -36,7 +39,7 @@ public class FinalBossCannon : Cannon
             Cannonball ball = obj.GetComponent<Cannonball>();
             if (ball != null)
             {
-                ball.Start = LaunchPoint.position;
+                ball.Start = _SecondPosition.position;
                 ball._speed = cannonballSpeed;
                 ball.Destination = Direction.position;
                 ball.SetSpeed();
@@ -52,7 +55,7 @@ public class FinalBossCannon : Cannon
             Cannonball ball = obj.GetComponent<Cannonball>();
             if (ball != null)
             {
-                ball.Start = LaunchPoint.position;
+                ball.Start = _ThirdPosition.position;
                 ball._speed = cannonballSpeed;
                 ball.Destination = Direction.position;
                 ball.SetSpeed();
@@ -89,10 +92,12 @@ public class FinalBossCannon : Cannon
             else if (Phase == Phase.Two)
             {
                 Launch(_cannonPool2);
+                transform.position = _SecondPosition.position;
             }
             else if (Phase == Phase.Three)
             {
                 Launch(_cannonPool3);
+                transform.position = _ThirdPosition.position;
             }
         }
     }
