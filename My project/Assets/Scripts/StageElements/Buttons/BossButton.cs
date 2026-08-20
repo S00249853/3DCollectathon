@@ -4,7 +4,8 @@ public class BossButton : RevealButton
 {
     [SerializeField] FinalBossCannon _boss;
     [SerializeField] Phase _phase;
-      protected override void Awake()
+    public GameObject[] Disable;
+    protected override void Awake()
     {
         base.Awake();
     }
@@ -14,5 +15,9 @@ public class BossButton : RevealButton
     {
         base.Stomped();
         _boss.Phase = _phase;
+        foreach (var disable in Disable)
+        {
+            disable.gameObject.SetActive(false);
+        }
     }
 }

@@ -16,6 +16,10 @@ public class Cannonball : MonoBehaviour
 
             float elapsedPercentage = _elapsedTime / _timeToDestination;
             transform.position = Vector3.Lerp(Start, Destination, elapsedPercentage);
+            if (transform.position == Destination)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 
