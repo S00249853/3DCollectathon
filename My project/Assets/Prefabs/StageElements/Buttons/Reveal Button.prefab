@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5226305492424682989}
   - component: {fileID: 4506863583890834893}
   - component: {fileID: 7786619703636882228}
+  - component: {fileID: 7530798463535086518}
   m_Layer: 0
   m_Name: Reveal Button
   m_TagString: Untagged
@@ -126,3 +127,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RevealButton
   _challenge: []
+--- !u!114 &7530798463535086518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5549586316359763239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58731db4f22b8614485a073d6c88ae7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeepActive

@@ -13696,7 +13696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star
+      value: LeftTowerStar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

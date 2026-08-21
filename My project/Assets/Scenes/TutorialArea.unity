@@ -2772,7 +2772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (1)
+      value: TutorialStar1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7871,7 +7871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star
+      value: TutorialStar2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11213,8 +11213,9 @@ GameObject:
   - component: {fileID: 2006874551}
   - component: {fileID: 2006874550}
   - component: {fileID: 2006874549}
+  - component: {fileID: 2006874553}
   m_Layer: 0
-  m_Name: Cube (13)
+  m_Name: TutorialBreakableCube
   m_TagString: Cracked
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11313,6 +11314,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -18.676, z: 0}
+--- !u!114 &2006874553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006874548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25990aa96159eb74eb776eb7a44afdc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DontRespawn
 --- !u!43 &2039855504
 Mesh:
   m_ObjectHideFlags: 0
@@ -11682,7 +11695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5549586316359763239, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: m_Name
-      value: Reveal Button
+      value: TutorialRevealButton
       objectReference: {fileID: 0}
     - target: {fileID: 7786619703636882228, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: _challenge.Array.size

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2184820826309846584}
   - component: {fileID: 4948762395532198186}
   - component: {fileID: 6415848945431323296}
+  - component: {fileID: -7997895688956535304}
   m_Layer: 0
   m_Name: Star
   m_TagString: Star
@@ -112,3 +113,15 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7997895688956535304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955651874307916790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25990aa96159eb74eb776eb7a44afdc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DontRespawn

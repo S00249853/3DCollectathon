@@ -2601,7 +2601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (8)
+      value: HubStar9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7449,7 +7449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5549586316359763239, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: m_Name
-      value: Reveal Button (4)
+      value: HubRevealButton5
       objectReference: {fileID: 0}
     - target: {fileID: 7786619703636882228, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: _challenge.Array.size
@@ -26681,7 +26681,7 @@ GameObject:
   - component: {fileID: 172113860}
   - component: {fileID: 172113859}
   m_Layer: 0
-  m_Name: Cube (10)
+  m_Name: HubCrackedCube2
   m_TagString: Cracked
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44622,7 +44622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (8)
+      value: HubStar14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54980,7 +54980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star
+      value: HubStar1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -55327,7 +55327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (8)
+      value: HubStar16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -65221,6 +65221,63 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1001 &431886270
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 88.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -24.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659078638870289470, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
+      propertyPath: m_Name
+      value: HubStar17
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 676f71f99d971c54aab829956756aa01, type: 3}
 --- !u!4 &432794987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3891484096477352351, guid: cb9185a22e055284485edb7cc6d119a9, type: 3}
@@ -104153,7 +104210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5549586316359763239, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: m_Name
-      value: Reveal Button (2)
+      value: HubRevealButton4
       objectReference: {fileID: 0}
     - target: {fileID: 7786619703636882228, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: _challenge.Array.size
@@ -106958,7 +107015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (6)
+      value: HubStar13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -122543,7 +122600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (8)
+      value: HubStar4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -134660,7 +134717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (8)
+      value: HubStar10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -137430,7 +137487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star
+      value: HubStar21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -139043,7 +139100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5549586316359763239, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: m_Name
-      value: Reveal Button (3)
+      value: HubRevealButton2
       objectReference: {fileID: 0}
     - target: {fileID: 7786619703636882228, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: _challenge.Array.size
@@ -146767,7 +146824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (9)
+      value: HubStar7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -155645,7 +155702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (1)
+      value: HubStar2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -168771,7 +168828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (5)
+      value: HubStar12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -171529,7 +171586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (3)
+      value: HubStar19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -178300,7 +178357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (4)
+      value: HubStar6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -180395,7 +180452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5549586316359763239, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: m_Name
-      value: Reveal Button
+      value: HubRevealButton1
       objectReference: {fileID: 0}
     - target: {fileID: 7786619703636882228, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: _challenge.Array.size
@@ -185015,7 +185072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (3)
+      value: HubStar5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -187914,7 +187971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (4)
+      value: HubStar18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -221837,7 +221894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (8)
+      value: HubStar8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -222281,7 +222338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (2)
+      value: HubStar3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -223299,7 +223356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (7)
+      value: HubStar15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -230850,7 +230907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5549586316359763239, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: m_Name
-      value: Reveal Button (1)
+      value: HubRevealButton3
       objectReference: {fileID: 0}
     - target: {fileID: 7786619703636882228, guid: e83385092846c31409124f39989b898d, type: 3}
       propertyPath: _challenge.Array.size
@@ -305232,7 +305289,7 @@ GameObject:
   - component: {fileID: 1980719225}
   - component: {fileID: 1980719224}
   m_Layer: 0
-  m_Name: Cube (7)
+  m_Name: HubCrackedCube1
   m_TagString: Cracked
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320908,7 +320965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5955651874307916790, guid: 676f71f99d971c54aab829956756aa01, type: 3}
       propertyPath: m_Name
-      value: Star (8)
+      value: HubStar11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -326948,6 +327005,7 @@ SceneRoots:
   - {fileID: 1041782263}
   - {fileID: 1299001391}
   - {fileID: 1349225468}
+  - {fileID: 431886270}
   - {fileID: 310396687}
   - {fileID: 254214410}
   - {fileID: 1173123642}
