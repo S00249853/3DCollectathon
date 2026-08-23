@@ -596,7 +596,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Prefabs/StageElements
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -606,24 +606,22 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Prefabs/StageElements
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Dtpol\source\repos\3DCollectathon\My project
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 183}
+    scrollPos: {x: 0, y: 139}
     m_SelectedIDs:
-    - m_Data: 50210
+    - m_Data: 58098
     m_LastClickedID:
-      m_Data: 50210
+      m_Data: 58098
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 50032
-    - m_Data: 50034
-    - m_Data: 50036
-    - m_Data: 50038
+    - m_Data: 50190
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -659,9 +657,6 @@ MonoBehaviour:
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 50032
-    - m_Data: 50034
-    - m_Data: 50036
-    - m_Data: 50038
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -689,8 +684,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: -27936
-    m_LastClickedInstanceID: -27936
+    - m_Data: 52624
+    m_LastClickedInstanceID: 52624
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -764,25 +759,17 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: -27936
+      - m_Data: 52624
       m_LastClickedID:
-        m_Data: -27936
+        m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -27892
-      - m_Data: -26878
-      - m_Data: -12014
-      - m_Data: -8386
-      - m_Data: -2998
+      - m_Data: -71478
+      - m_Data: -40186
+      - m_Data: -33746
+      - m_Data: -5484
+      - m_Data: -2978
       - m_Data: -1300
-      - m_Data: 52292
-      - m_Data: 52368
-      - m_Data: 52612
-      - m_Data: 53702
-      - m_Data: 54524
-      - m_Data: 56692
-      - m_Data: 57926
-      - m_Data: 58166
-      - m_Data: 58268
+      - m_Data: 52290
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1378,7 +1365,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       displayed: 1
       id: UnityEditor.ProBuilder.MenuActionSettingsOverlay
-      index: 13
+      index: 14
       contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
@@ -1431,9 +1418,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -226.46799, y: 74.679214, z: -68.42862}
+    m_Target: {x: -350.33994, y: 42.778286, z: 182.91559}
     speed: 2
-    m_Value: {x: -226.46799, y: 74.679214, z: -68.42862}
+    m_Value: {x: -350.33994, y: 42.778286, z: 182.91559}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1479,9 +1466,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.020078078, y: -0.73695356, z: 0.056666482, w: 0.67078483}
+    m_Target: {x: 0.040940143, y: 0.673927, z: 0.0039271736, w: -0.7353042}
     speed: 2
-    m_Value: {x: 0.026844097, y: -0.73055255, z: 0.06310392, w: 0.6794043}
+    m_Value: {x: 0.04101698, y: 0.67398983, z: 0.0038724614, w: -0.73759085}
   m_Size:
     m_Target: 216.16692
     speed: 2
@@ -1799,7 +1786,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 372
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
