@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -254,7 +254,7 @@ MonoBehaviour:
   - {fileID: 18}
   - {fileID: 19}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 2
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -596,7 +596,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/StageElements
+    - Assets/Prefabs/StageElements/Buttons
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -606,22 +606,23 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/StageElements
+  - Assets/Prefabs/StageElements/Buttons
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Dtpol\source\repos\3DCollectathon\My project
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 139}
+    scrollPos: {x: 0, y: 107}
     m_SelectedIDs:
-    - m_Data: 58098
+    - m_Data: 67650
     m_LastClickedID:
-      m_Data: 58098
+      m_Data: 67650
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 50032
-    - m_Data: 50190
+    - m_Data: 67564
+    - m_Data: 67572
+    - m_Data: 67634
     - m_Data: 1000000000
     - m_Data: 2147483647
     m_RenameOverlay:
@@ -654,9 +655,7 @@ MonoBehaviour:
     m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
-    m_ExpandedIDs:
-    - m_Data: 0
-    - m_Data: 50032
+    m_ExpandedIDs: []
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -684,8 +683,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 52624
-    m_LastClickedInstanceID: 52624
+    - m_Data: -59710
+    m_LastClickedInstanceID: -59710
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -757,19 +756,18 @@ MonoBehaviour:
     m_DynamicPanelBehavior: 0
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 6173}
       m_SelectedIDs:
-      - m_Data: 52624
+      - m_Data: -59710
       m_LastClickedID:
-        m_Data: 0
+        m_Data: -59710
       m_ExpandedIDs:
-      - m_Data: -71478
-      - m_Data: -40186
-      - m_Data: -33746
-      - m_Data: -5484
-      - m_Data: -2978
-      - m_Data: -1300
-      - m_Data: 52290
+      - m_Data: -180558
+      - m_Data: -180084
+      - m_Data: -54942
+      - m_Data: -54726
+      - m_Data: -52906
+      - m_Data: 70086
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1365,7 +1363,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       displayed: 1
       id: UnityEditor.ProBuilder.MenuActionSettingsOverlay
-      index: 14
+      index: 13
       contents: '{"m_Layout":4,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":0.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
       floating: 0
       collapsed: 0
@@ -1418,9 +1416,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -350.33994, y: 42.778286, z: 182.91559}
+    m_Target: {x: 188.07475, y: 156.82195, z: -211.95667}
     speed: 2
-    m_Value: {x: -350.33994, y: 42.778286, z: 182.91559}
+    m_Value: {x: 188.07475, y: 156.82195, z: -211.95667}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1466,13 +1464,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.040940143, y: 0.673927, z: 0.0039271736, w: -0.7353042}
+    m_Target: {x: 0.017018454, y: 0.9809288, z: 0.109735556, w: 0.14832547}
     speed: 2
-    m_Value: {x: 0.04101698, y: 0.67398983, z: 0.0038724614, w: -0.73759085}
+    m_Value: {x: 0.01704786, y: 0.9826237, z: 0.109925166, w: 0.14858176}
   m_Size:
-    m_Target: 216.16692
+    m_Target: 236.05968
     speed: 2
-    m_Value: 216.16692
+    m_Value: 236.05968
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1786,7 +1784,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 372
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
