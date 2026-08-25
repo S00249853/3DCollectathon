@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,10 +12,12 @@ public class GameManager : MonoBehaviour
     //Variables
     private int _collected;
     private int _maxHealth = 100;
+    private GameObject[] _enemiesInCurrentScene;
     private PlayerStateMachine _player;
     private Transform _checkpoint;
     [SerializeField] private TMP_Text _collectables;
     [SerializeField] private TMP_Text _challengeTimer;
+    [SerializeField] private TMP_Text _healthText;
     [SerializeField] private int _health;
 
     //Getters and Setters
@@ -35,6 +39,10 @@ public class GameManager : MonoBehaviour
 
     private void OnPlayerDeath()
     {
+        foreach (var enemy in _enemiesInCurrentScene)
+        {
+            enemy.SetActive(true);
+        }
         CharacterController characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         characterController.enabled = false;
         characterController.transform.position = _checkpoint.position;
@@ -46,6 +54,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>();
+        _enemiesInCurrentScene = GameObject.FindGameObjectsWithTag("Enemy");
     }
         
     private void Awake()
@@ -65,5 +74,20 @@ public class GameManager : MonoBehaviour
             OnPlayerDeath();
         }
         _collectables.text = $": {_collected}";
+        _healthText.text = $"Health : {_health.ToString()}";
+        if (_health <= 50 && _health > 20)
+        {
+            _healthText.color = Color.yellow;
+        }
+
+        else if (_health <= 20)
+        {
+            _healthText.color = Color.red;
+        }
+
+        else 
+        { 
+            _healthText.color = Color.white; 
+        }
     }
 }

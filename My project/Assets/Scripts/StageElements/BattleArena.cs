@@ -21,7 +21,7 @@ public class BattleArena : MonoBehaviour
     {
         foreach (GameObject enemy in _enemies)
         {
-            if (enemy == null)
+            if (enemy.activeSelf == false)
             {
                 _completion++;
             }

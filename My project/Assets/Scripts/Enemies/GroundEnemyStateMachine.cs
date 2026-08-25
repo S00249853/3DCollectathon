@@ -29,7 +29,7 @@ public class GroundEnemyStateMachine : MonoBehaviour, IStompable
 
     public void Stomped()
     {
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 
     private void Awake()
