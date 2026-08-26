@@ -61,6 +61,12 @@ public class PlayerWallState : PlayerBaseState
     public override void UpdateState()
     {
         Ctx.AppliedMovementY = -1f;
+        //Ray ray = new Ray(Ctx.transform.position, -Ctx.transform.forward);
+        //Physics.Raycast(ray, out RaycastHit hit, 10f);
+        //if (Vector3.Distance(hit.transform.position,Ctx.gameObject.transform.position) >= 1.5f)
+        //{
+        //    Ctx.OnWall = false;
+        //}
         CheckSwitchState();
     }
 }

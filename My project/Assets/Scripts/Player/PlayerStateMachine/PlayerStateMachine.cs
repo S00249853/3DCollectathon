@@ -64,6 +64,7 @@ public class PlayerStateMachine : MonoBehaviour
     private ControllerColliderHit _climbableWall;
     private Coroutine _cameraResetRoutine;
     private Coroutine _climbRoutine = null;
+    private GameObject _currentWall;
 
     //Miscellanious Variables
     private float _rotationFactorPerFrame = 15.0f;
@@ -150,6 +151,7 @@ public class PlayerStateMachine : MonoBehaviour
     public Coroutine KnockbackRoutine { get { return _knockbackRoutine; } set { _knockbackRoutine = value; } }
     public Dictionary<int, float> InitialJumpVelocities { get { return _initialJumpVelocities; } }
     public Dictionary<int, float> JumpGravities { get { return _jumpGravities; } }
+    public GameObject CurrentWall { get { return _currentWall; } }
     public MeshRenderer MeshRenderer { get { return _meshRenderer; } set { _meshRenderer = value; } }
     public PlayerBaseState CurrentState { get { return _currentState; } set { _currentState = value; } }
     public Transform Checkpoint { get { return _checkpoint; } set { _checkpoint = value; } }
@@ -348,6 +350,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (!_characterController.isGrounded && hit.normal.y < 0.1f && !_isDashing && CharacterController.collisionFlags == CollisionFlags.Sides && hit.gameObject.tag != "NonStick" && hit.gameObject.tag != "Cannonball" && hit.gameObject.tag != "Climbable")
         {
             _wall = hit;
+            _currentWall = hit.gameObject;
             _onWall = true;
         }
 
@@ -387,7 +390,7 @@ public class PlayerStateMachine : MonoBehaviour
             }
         }
 
-        if (hit.normal.y > 0.6f && hit.gameObject.tag == "Cannonball")
+        if ( hit.normal.y > 0.5f && hit.gameObject.tag == "Cannonball")
         {
             OnBounce(10f);
             hit.gameObject.SetActive(false);

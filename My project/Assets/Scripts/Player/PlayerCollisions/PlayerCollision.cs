@@ -17,12 +17,12 @@ public class PlayerCollision : MonoBehaviour
         {
             Debug.Log("Cannonball Hit");
             Vector3 hitDirection = collision.gameObject.transform.forward;
-            if (_cc.collisionFlags != CollisionFlags.Below)
-            {
+            //if (_cc.collisionFlags != CollisionFlags.Below || _cc.collisionFlags == CollisionFlags.None)
+          //  {
                 hitDirection = hitDirection.normalized;
                 _player.OnHurt(hitDirection, 10);
                 collision.gameObject.SetActive(false);
-            }
+          //  }
         }
     }
 

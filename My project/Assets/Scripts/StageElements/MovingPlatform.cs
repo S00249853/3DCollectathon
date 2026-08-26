@@ -25,6 +25,12 @@ public class MovingPlatform : MonoBehaviour
         GetWaypoint();
     }
 
+    private void OnDisable()
+    {
+        _index = 0;
+        GetWaypoint();
+    }
+
     private void FixedUpdate()
     {
         if (_delayCd < 0)
