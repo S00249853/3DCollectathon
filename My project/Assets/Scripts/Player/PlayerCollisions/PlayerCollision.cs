@@ -1,4 +1,7 @@
+using System.Collections;
+using Unity.VectorGraphics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -9,6 +12,13 @@ public class PlayerCollision : MonoBehaviour
     {
         _player = GetComponent<PlayerStateMachine>();
         _cc = GetComponent<CharacterController>();
+    }
+
+    IEnumerator VictoryRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("VictoryScene");
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -84,6 +94,12 @@ public class PlayerCollision : MonoBehaviour
             ObjectActivator activator = other.gameObject.GetComponent<ObjectActivator>();
             activator.Activate();
             Debug.Log("Object Activated");
+        }
+
+        if (other.gameObject.tag == "FinalBoss" & _player.IsGroundPounding)
+        {
+            Destroy(other.gameObject);
+            StartCoroutine(VictoryRoutine());
         }
     }
 

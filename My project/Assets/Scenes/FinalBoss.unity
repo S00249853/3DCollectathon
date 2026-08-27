@@ -37467,7 +37467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b06fa51fd25f2b4c885fa1a7860fe24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pool
-  tag: 
   prefab: {fileID: 5095840032322142032, guid: 8c282fc0471b2a942a8c042dd2477097, type: 3}
   size: 16
 --- !u!135 &1524926303
@@ -37485,7 +37484,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
