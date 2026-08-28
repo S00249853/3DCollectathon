@@ -38,8 +38,8 @@ public class PlayerController : MonoBehaviour
 
     protected virtual void BindInputs()
     {
-    //    playerInput.actions["OpenMenu"].performed += OnOpenMenu;
-    //    playerInput.actions["CloseMenu"].performed += OnCloseMenu;
+        playerInput.actions["OpenMenu"].performed += OnOpenMenu;
+        playerInput.actions["CloseMenu"].performed += OnCloseMenu;
 
         playerInput.actions["Move"].performed += playerStateMachine.OnMove;
         playerInput.actions["Move"].canceled += playerStateMachine.OnMove;
@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
 
     protected virtual void UnBindInputs()
     {
-        //playerInput.actions["OpenMenu"].performed -= OnOpenMenu;
-        //playerInput.actions["CloseMenu"].performed -= OnCloseMenu;
+        playerInput.actions["OpenMenu"].performed -= OnOpenMenu;
+        playerInput.actions["CloseMenu"].performed -= OnCloseMenu;
 
         playerInput.actions["Move"].performed -= playerStateMachine.OnMove;
         playerInput.actions["Move"].canceled -= playerStateMachine.OnMove;
@@ -76,13 +76,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCloseMenu(InputAction.CallbackContext obj)
     {
-        //GameMode.Instance.HideInventory();
-        //playerInput.SwitchCurrentActionMap("Game");
+        GameManager.Instance.HideInventory();
+        playerInput.SwitchCurrentActionMap("Game");
     }
 
     private void OnOpenMenu(InputAction.CallbackContext obj)
     {
-        //GameMode.Instance.ShowInventory(GetComponent<Inventory>());
-        //playerInput.SwitchCurrentActionMap("Menu");
+        GameManager.Instance.ShowInventory();
+        playerInput.SwitchCurrentActionMap("Menu");
     }
 }
