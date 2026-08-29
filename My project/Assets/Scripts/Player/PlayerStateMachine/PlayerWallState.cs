@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerWallState : PlayerBaseState
 {
+    //bool _onWall;
     public PlayerWallState(PlayerStateMachine ctx, PlayerStateFactory factory) : base(ctx, factory)
     {
         IsRootState = true;
@@ -46,11 +48,13 @@ public class PlayerWallState : PlayerBaseState
     public override void EnterState()
     {
         InitializeSubState();
+        //Ctx.StartCoroutine(WallDelayRoutine());
     }
 
     public override void ExitState()
     {
         Ctx.OnWall = false;
+        Debug.Log("Exiting Wall");
     }
 
     public override void InitializeSubState()
@@ -58,14 +62,25 @@ public class PlayerWallState : PlayerBaseState
         SetSubState(Factory.Still());
     }
 
+    //private IEnumerator WallDelayRoutine()
+    //{
+    //    yield return new WaitForSeconds(.5f);
+    //    _onWall = true;
+    //}
+
     public override void UpdateState()
     {
         Ctx.AppliedMovementY = -1f;
-        //Ray ray = new Ray(Ctx.transform.position, -Ctx.transform.forward);
-        //Physics.Raycast(ray, out RaycastHit hit, 10f);
-        //if (Vector3.Distance(hit.transform.position,Ctx.gameObject.transform.position) >= 1.5f)
+        //if (_onWall)
         //{
-        //    Ctx.OnWall = false;
+        //    Debug.Log("On Wall");
+        //    Ray ray = new Ray(Ctx.transform.position, -Ctx.transform.forward);
+        //    Physics.Raycast(ray, out RaycastHit hit, 10f);
+        //    if (hit.collider.gameObject != Ctx.CurrentWall || hit.collider.gameObject == null)
+        //    {
+        //        Debug.Log("Off Wall");
+        //        Ctx.OnWall = false;
+        //    }
         //}
         CheckSwitchState();
     }

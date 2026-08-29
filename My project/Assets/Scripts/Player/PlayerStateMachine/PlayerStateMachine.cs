@@ -282,7 +282,7 @@ public class PlayerStateMachine : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(wallRotation);
 
                 transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
-                Debug.Log("Test for wall jump rotation");
+               
             }
 
             else if (_wallJumpBuffer)
@@ -292,7 +292,7 @@ public class PlayerStateMachine : MonoBehaviour
                 Quaternion targetRotation = Quaternion.LookRotation(wallRotation);
 
                 transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, 20f * Time.deltaTime);
-                Debug.Log("Test for wall jump rotation");
+           
             }
 
             else if (_isClimb)
