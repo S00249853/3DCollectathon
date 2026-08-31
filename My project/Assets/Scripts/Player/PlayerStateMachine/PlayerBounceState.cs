@@ -70,20 +70,11 @@ public class PlayerBounceState : PlayerBaseState
     }
     private void HandleGravity()
     {
-        bool isFalling = Ctx.CurrentMovementY <= 0.0f || !Ctx.IsJumpPressed;
-        float fallMultiplier = 2.0f;
+            float fallMultiplier = 2.0f;
 
-        if (isFalling)
-        {
             float previousYVelocity = Ctx.CurrentMovementY;
             Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.JumpGravities[Ctx.JumpCount] * fallMultiplier * Time.deltaTime);
             Ctx.AppliedMovementY = Mathf.Max((previousYVelocity + Ctx.CurrentMovementY) * .5f, -20.0f);
-        }
-        else
-        {
-            float previousYVelocity = Ctx.CurrentMovementY;
-            Ctx.CurrentMovementY = Ctx.CurrentMovementY + (Ctx.JumpGravities[Ctx.JumpCount] * Time.deltaTime);
-            Ctx.AppliedMovementY = (previousYVelocity + Ctx.CurrentMovementY) * .5f;
-        }
+
     }
 }

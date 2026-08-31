@@ -37508,14 +37508,14 @@ MonoBehaviour:
   Cannonballs: {fileID: 1524926302}
   LaunchPoint: {fileID: 1077739502}
   Direction: {fileID: 611888409}
-  launchCd: 2
-  cannonballSpeed: 15
+  launchCd: 1.3
+  cannonballSpeed: 30
   _secondPosition: {fileID: 372970138}
   _thirdPosition: {fileID: 1517296934}
   _currentPosition: {fileID: 0}
   Phase: 0
-  _cannonballSpeed2: 20
-  _cannonballSpeed3: 21
+  _cannonballSpeed2: 35
+  _cannonballSpeed3: 40
 --- !u!114 &1524926302
 MonoBehaviour:
   m_ObjectHideFlags: 0
