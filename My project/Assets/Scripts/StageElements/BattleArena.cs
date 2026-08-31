@@ -16,6 +16,14 @@ public class BattleArena : MonoBehaviour
         _maxCompletion = _enemies.Length;
     }
 
+    private void OnEnable()
+    {
+        foreach (GameObject active in _activated)
+        {
+            active.SetActive(false);
+        }
+        _maxCompletion = _enemies.Length;
+    }
     // Update is called once per frame
     void Update()
     {

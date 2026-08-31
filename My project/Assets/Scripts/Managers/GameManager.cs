@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     //Variables
     private int _collected;
-    private int _totalCollectables = 26;
+    private int _totalCollectables = 30;
     private int _maxHealth = 100;
     private GameObject[] _enemiesInCurrentScene;
     private PlayerStateMachine _player;

@@ -21,15 +21,7 @@ public class ChallengeButton : MonoBehaviour, IStompable
         mesh.enabled = true;
         foreach (GameObject challenge in _challenge)
         {
-            if (challenge.activeSelf == true )
-            {
-                challenge.SetActive(false);
-            }
-            else if (challenge.activeSelf == false)
-            {
-                challenge.SetActive(true);
-            }
-
+                challenge.SetActive(false);         
         }
     }
     public void Stomped()
@@ -40,15 +32,8 @@ public class ChallengeButton : MonoBehaviour, IStompable
         collider.enabled = false;
         mesh.enabled = false;
         foreach (GameObject challenge in _challenge)
-        {
-            if (challenge.activeSelf == true)
-            {
-                challenge.SetActive(false);
-            }
-            else if (challenge.activeSelf == false)
-            {
-                challenge.SetActive(true);
-            }
+        {   
+                challenge.SetActive(true);        
         }
     }
 

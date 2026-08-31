@@ -222,7 +222,7 @@ MonoBehaviour:
 
 
     The door in the corner leads
-    back to the hub. Try to find all 26 collectables!'
+    back to the hub. Try to find all 30 collectables!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
