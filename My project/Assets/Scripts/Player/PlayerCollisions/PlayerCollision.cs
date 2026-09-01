@@ -40,6 +40,8 @@ public class PlayerCollision : MonoBehaviour
     {
         if (other.gameObject.tag == "Star")
         {
+            other.gameObject.TryGetComponent<Collectable>(out Collectable c);
+            c.Collected = true;
             Destroy(other.gameObject);
             GameManager.Instance.Collected++;
         }

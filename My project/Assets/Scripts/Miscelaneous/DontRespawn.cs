@@ -5,6 +5,7 @@ public class DontRespawn : MonoBehaviour
 {
 
     public static List<string> Collected = new List<string>();
+    [SerializeField] Collectable _collectable;
 
     void Start()
     {
@@ -16,7 +17,10 @@ public class DontRespawn : MonoBehaviour
 
     void OnDestroy()
     {
-        Collected.Add(gameObject.name);
+        if (_collectable.Collected == true)
+        {
+            Collected.Add(gameObject.name);
+        }
     }
 }
 

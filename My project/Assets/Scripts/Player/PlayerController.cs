@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         playerInput.actions["OpenMenu"].performed += OnOpenMenu;
         playerInput.actions["CloseMenu"].performed += OnCloseMenu;
+        playerInput.actions["Quit"].performed += OnQuit;
 
         playerInput.actions["Move"].performed += playerStateMachine.OnMove;
         playerInput.actions["Move"].canceled += playerStateMachine.OnMove;
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         playerInput.actions["OpenMenu"].performed -= OnOpenMenu;
         playerInput.actions["CloseMenu"].performed -= OnCloseMenu;
+        playerInput.actions["Quit"].performed -= OnQuit;
 
         playerInput.actions["Move"].performed -= playerStateMachine.OnMove;
         playerInput.actions["Move"].canceled -= playerStateMachine.OnMove;
@@ -84,5 +86,13 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.Instance.ShowInventory();
         playerInput.SwitchCurrentActionMap("Menu");
+    }
+
+    private void OnQuit(InputAction.CallbackContext obj)
+    {
+        if (GameManager.Instance.Menu.activeSelf)
+        {
+            Application.Quit();
+        }
     }
 }

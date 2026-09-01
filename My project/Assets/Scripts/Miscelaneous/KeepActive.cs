@@ -4,18 +4,21 @@ using UnityEngine;
 public class KeepActive : MonoBehaviour
 {
     public static List<string> Activated = new List<string>();
+    [SerializeField] RevealButton _button;
 
     void Start()
     {
         if (Activated.Contains(gameObject.name))
         {
-            RevealButton button = gameObject.GetComponent<RevealButton>();
-            button.Stomped();
+            _button.Stomped();
         }
     }
 
     void OnDestroy()
     {
-        Activated.Add(gameObject.name);
+        if (_button.Activated == true)
+        {
+            Activated.Add(gameObject.name);
+        }
     }
 }

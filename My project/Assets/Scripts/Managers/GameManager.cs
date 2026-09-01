@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private int _collected;
     private int _totalCollectables = 30;
     private int _maxHealth = 100;
+    private GameObject _sceneStartMenu;
     private GameObject[] _enemiesInCurrentScene;
     private PlayerStateMachine _player;
     private Transform _checkpoint;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     public int TotalCollectables { get { return _totalCollectables; } }
     public int Health { get { return _health; } set { _health = value; } }
     public int MaxHealth { get { return _maxHealth; } set { _maxHealth = value; } }
+    public GameObject Menu { get { return _menu; } }
     public TMP_Text ChallengeTimer { get { return _challengeTimer; } set { _challengeTimer = value; } }
     public Transform Checkpoint { get { return _checkpoint; }  set { _checkpoint = value; } }
 
@@ -57,9 +59,15 @@ public class GameManager : MonoBehaviour
 
     public void ShowInventory()
     {
-      
-        _menu.gameObject.SetActive(true);
-        UnityEngine.Cursor.visible = true;
+       if (_sceneStartMenu != null && _sceneStartMenu.TryGetComponent<UiCloser>(out UiCloser closer))
+        {
+            closer.CloseUI();
+            _sceneStartMenu = null; 
+        }
+
+            _menu.gameObject.SetActive(true);
+            UnityEngine.Cursor.visible = true;
+         
     }
 
     public void HideInventory()
@@ -70,6 +78,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        _sceneStartMenu = GameObject.FindGameObjectWithTag("Menu");
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>();
         _enemiesInCurrentScene = GameObject.FindGameObjectsWithTag("Enemy");
     }

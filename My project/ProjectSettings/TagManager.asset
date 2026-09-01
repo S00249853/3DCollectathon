@@ -23,6 +23,7 @@ TagManager:
   - Healer
   - Activator
   - FinalBoss
+  - Menu
   layers:
   - Default
   - TransparentFX
